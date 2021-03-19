@@ -9,7 +9,7 @@ class Repository(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def add_friend_to_list_for_uid(self, uid: int) -> bool:
+    def add_friend_to_list_for_uid(self, uid: int, friend_uid: int) -> bool:
         pass
 
     @abc.abstractmethod
