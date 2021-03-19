@@ -65,9 +65,9 @@ class FriendsService(FriendsBase):
                                        stream: 'grpclib.server.Stream['
                                                'CreateConnectionForUsersRequest, '
                                                'CreateConnectionForUsersResponse]') -> None:
+        logger.debug("Received request to CreateConnectionForUsers")
         request = await stream.recv_message()
         res = self.add_friend_to_cache(request)
-        print(res.success)
         await stream.send_message(res)
 
     async def UpdateConnectionBetweenUsers(self,
