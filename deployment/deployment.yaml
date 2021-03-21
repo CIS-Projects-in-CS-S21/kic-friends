@@ -35,6 +35,8 @@ spec:
           ports:
             - containerPort: 50051
           env:
+            - name: PROD
+              value: "true"
             - name: PORT
               value: "50051"
             - name: MONGO_URI
