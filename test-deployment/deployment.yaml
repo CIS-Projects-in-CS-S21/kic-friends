@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: kic
+  name: test-kic-friends-service
+spec:
+  ports:
+    - port: 50051
+      targetPort: 50051
+      name: grpc-web
+  selector:
+    app: test-kic-friends
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: kic
+  name: test-kic-friends
+spec:
+  selector:
+    matchLabels:
+      app: test-kic-friends
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      namespace: kic
+      labels:
+        app: test-kic-friends
+    spec:
+      containers:
+        - image: gcr.io/keeping-it-casual/kic-friends:dev
+          name: test-kic-friends
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 50051
+          env:
+            - name: PORT
+              value: "50051"
+            - name: MONGO_URI
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-uri
+                  key: mongo-uri
