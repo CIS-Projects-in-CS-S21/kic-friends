@@ -2,10 +2,10 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   namespace: kic
-  name: test-friends-virtual-service
+  name: friends-virtual-service
 spec:
   hosts:
-    - "test.api.keeping-it-casual.com"
+    - "api.keeping-it-casual.com"
   gateways:
     - kic-gateway
   http:
@@ -14,7 +14,7 @@ spec:
             prefix: /kic.friends.Friends
       route:
         - destination:
-            host: test-kic-friends-service
+            host: kic-friends-service
             port:
               number: 50051
       corsPolicy:
