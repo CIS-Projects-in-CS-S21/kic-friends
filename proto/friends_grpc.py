@@ -16,6 +16,10 @@ import proto.friends_pb2
 class FriendsBase(abc.ABC):
 
     @abc.abstractmethod
+    async def GetFriendsUsernamesForUser(self, stream: 'grpclib.server.Stream[proto.friends_pb2.GetFriendsForUserRequest, proto.friends_pb2.GetFriendsUsernamesForUserResponse]') -> None:
+        pass
+
+    @abc.abstractmethod
     async def GetFriendsForUser(self, stream: 'grpclib.server.Stream[proto.friends_pb2.GetFriendsForUserRequest, proto.friends_pb2.GetFriendsForUserResponse]') -> None:
         pass
 
@@ -49,6 +53,12 @@ class FriendsBase(abc.ABC):
 
     def __mapping__(self) -> typing.Dict[str, grpclib.const.Handler]:
         return {
+            '/kic.friends.Friends/GetFriendsUsernamesForUser': grpclib.const.Handler(
+                self.GetFriendsUsernamesForUser,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                proto.friends_pb2.GetFriendsForUserRequest,
+                proto.friends_pb2.GetFriendsUsernamesForUserResponse,
+            ),
             '/kic.friends.Friends/GetFriendsForUser': grpclib.const.Handler(
                 self.GetFriendsForUser,
                 grpclib.const.Cardinality.UNARY_UNARY,
@@ -103,6 +113,12 @@ class FriendsBase(abc.ABC):
 class FriendsStub:
 
     def __init__(self, channel: grpclib.client.Channel) -> None:
+        self.GetFriendsUsernamesForUser = grpclib.client.UnaryUnaryMethod(
+            channel,
+            '/kic.friends.Friends/GetFriendsUsernamesForUser',
+            proto.friends_pb2.GetFriendsForUserRequest,
+            proto.friends_pb2.GetFriendsUsernamesForUserResponse,
+        )
         self.GetFriendsForUser = grpclib.client.UnaryUnaryMethod(
             channel,
             '/kic.friends.Friends/GetFriendsForUser',
