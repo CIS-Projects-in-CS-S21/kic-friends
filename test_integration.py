@@ -1,5 +1,6 @@
 import asyncio
 import unittest
+import os
 
 from grpclib import GRPCError
 from grpclib.client import Channel
@@ -11,7 +12,10 @@ from proto.friends_grpc import FriendsStub
 
 
 async def asyncSetUp(tests):
-    channel = Channel('localhost', 50051)
+    location = 'localhost'
+    if os.getenv("URL"):
+        location = os.getenv("URL")
+    channel = Channel(location, 50051)
     greeter = FriendsStub(channel)
     tests.client = greeter
     repo = {
