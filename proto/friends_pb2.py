@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'Z\025./proto/friends;proto',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x13proto/friends.proto\x12\x0bkic.friends\x1a\x12proto/common.proto\"@\n\x18GetFriendsForUserRequest\x12$\n\x04user\x18\x01 \x01(\x0b\x32\x10.kic.common.UserR\x04user\"5\n\x19GetFriendsForUserResponse\x12\x18\n\x07\x66riends\x18\x01 \x03(\x04R\x07\x66riends\"~\n GetRecommendationsForUserRequest\x12$\n\x04user\x18\x01 \x01(\x0b\x32\x10.kic.common.UserR\x04user\x12\x34\n\x15numberRecommendations\x18\x02 \x01(\x05R\x15numberRecommendations\"_\n!GetRecommendationsForUserResponse\x12:\n\x0frecommendations\x18\x01 \x03(\x0b\x32\x10.kic.common.UserR\x0frecommendations\"\x8d\x01\n#UpdateConnectionBetweenUsersRequest\x12 \n\x0b\x66irstUserID\x18\x01 \x01(\x04R\x0b\x66irstUserID\x12\"\n\x0csecondUserID\x18\x02 \x01(\x04R\x0csecondUserID\x12 \n\x0bupdateValue\x18\x03 \x01(\x02R\x0bupdateValue\"h\n GetConnectionBetweenUsersRequest\x12 \n\x0b\x66irstUserID\x18\x01 \x01(\x04R\x0b\x66irstUserID\x12\"\n\x0csecondUserID\x18\x02 \x01(\x04R\x0csecondUserID\"P\n\x1e\x43onnectionBetweenUsersResponse\x12.\n\x12\x63onnectionStrength\x18\x01 \x01(\x02R\x12\x63onnectionStrength\"k\n#DeleteConnectionBetweenUsersRequest\x12 \n\x0b\x66irstUserID\x18\x01 \x01(\x04R\x0b\x66irstUserID\x12\"\n\x0csecondUserID\x18\x02 \x01(\x04R\x0csecondUserID\"&\n$DeleteConnectionBetweenUsersResponse\"g\n\x1f\x43reateConnectionForUsersRequest\x12 \n\x0b\x66irstUserID\x18\x01 \x01(\x04R\x0b\x66irstUserID\x12\"\n\x0csecondUserID\x18\x02 \x01(\x04R\x0csecondUserID\"<\n CreateConnectionForUsersResponse\x12\x18\n\x07success\x18\x01 \x01(\x08R\x07success2\xe0\x05\n\x07\x46riends\x12\x62\n\x11GetFriendsForUser\x12%.kic.friends.GetFriendsForUserRequest\x1a&.kic.friends.GetFriendsForUserResponse\x12w\n\x19GetConnectionBetweenUsers\x12-.kic.friends.GetConnectionBetweenUsersRequest\x1a+.kic.friends.ConnectionBetweenUsersResponse\x12z\n\x19GetRecommendationsForUser\x12-.kic.friends.GetRecommendationsForUserRequest\x1a..kic.friends.GetRecommendationsForUserResponse\x12w\n\x18\x43reateConnectionForUsers\x12,.kic.friends.CreateConnectionForUsersRequest\x1a-.kic.friends.CreateConnectionForUsersResponse\x12}\n\x1cUpdateConnectionBetweenUsers\x12\x30.kic.friends.UpdateConnectionBetweenUsersRequest\x1a+.kic.friends.ConnectionBetweenUsersResponse\x12\x83\x01\n\x1c\x44\x65leteConnectionBetweenUsers\x12\x30.kic.friends.DeleteConnectionBetweenUsersRequest\x1a\x31.kic.friends.DeleteConnectionBetweenUsersResponseB\x17Z\x15./proto/friends;protob\x06proto3'
+  serialized_pb=b'\n\x13proto/friends.proto\x12\x0bkic.friends\x1a\x12proto/common.proto\"@\n\x18GetFriendsForUserRequest\x12$\n\x04user\x18\x01 \x01(\x0b\x32\x10.kic.common.UserR\x04user\"5\n\x19GetFriendsForUserResponse\x12\x18\n\x07\x66riends\x18\x01 \x03(\x04R\x07\x66riends\"~\n GetRecommendationsForUserRequest\x12$\n\x04user\x18\x01 \x01(\x0b\x32\x10.kic.common.UserR\x04user\x12\x34\n\x15numberRecommendations\x18\x02 \x01(\x05R\x15numberRecommendations\"_\n!GetRecommendationsForUserResponse\x12:\n\x0frecommendations\x18\x01 \x03(\x0b\x32\x10.kic.common.UserR\x0frecommendations\"\x8d\x01\n#UpdateConnectionBetweenUsersRequest\x12 \n\x0b\x66irstUserID\x18\x01 \x01(\x04R\x0b\x66irstUserID\x12\"\n\x0csecondUserID\x18\x02 \x01(\x04R\x0csecondUserID\x12 \n\x0bupdateValue\x18\x03 \x01(\x02R\x0bupdateValue\"h\n GetConnectionBetweenUsersRequest\x12 \n\x0b\x66irstUserID\x18\x01 \x01(\x04R\x0b\x66irstUserID\x12\"\n\x0csecondUserID\x18\x02 \x01(\x04R\x0csecondUserID\"P\n\x1e\x43onnectionBetweenUsersResponse\x12.\n\x12\x63onnectionStrength\x18\x01 \x01(\x02R\x12\x63onnectionStrength\"k\n#DeleteConnectionBetweenUsersRequest\x12 \n\x0b\x66irstUserID\x18\x01 \x01(\x04R\x0b\x66irstUserID\x12\"\n\x0csecondUserID\x18\x02 \x01(\x04R\x0csecondUserID\"&\n$DeleteConnectionBetweenUsersResponse\"g\n\x1f\x43reateConnectionForUsersRequest\x12 \n\x0b\x66irstUserID\x18\x01 \x01(\x04R\x0b\x66irstUserID\x12\"\n\x0csecondUserID\x18\x02 \x01(\x04R\x0csecondUserID\"<\n CreateConnectionForUsersResponse\x12\x18\n\x07success\x18\x01 \x01(\x08R\x07success\"`\n\x18\x41\x64\x64\x41waitingFriendRequest\x12 \n\x0b\x66irstUserID\x18\x01 \x01(\x04R\x0b\x66irstUserID\x12\"\n\x0csecondUserID\x18\x02 \x01(\x04R\x0csecondUserID\"5\n\x19\x41\x64\x64\x41waitingFriendResponse\x12\x18\n\x07success\x18\x01 \x01(\x08R\x07success2\xb0\x07\n\x07\x46riends\x12\x62\n\x11GetFriendsForUser\x12%.kic.friends.GetFriendsForUserRequest\x1a&.kic.friends.GetFriendsForUserResponse\x12j\n\x19GetAwaitingFriendsForUser\x12%.kic.friends.GetFriendsForUserRequest\x1a&.kic.friends.GetFriendsForUserResponse\x12w\n\x19GetConnectionBetweenUsers\x12-.kic.friends.GetConnectionBetweenUsersRequest\x1a+.kic.friends.ConnectionBetweenUsersResponse\x12z\n\x19GetRecommendationsForUser\x12-.kic.friends.GetRecommendationsForUserRequest\x1a..kic.friends.GetRecommendationsForUserResponse\x12w\n\x18\x43reateConnectionForUsers\x12,.kic.friends.CreateConnectionForUsersRequest\x1a-.kic.friends.CreateConnectionForUsersResponse\x12\x62\n\x11\x41\x64\x64\x41waitingFriend\x12%.kic.friends.AddAwaitingFriendRequest\x1a&.kic.friends.AddAwaitingFriendResponse\x12}\n\x1cUpdateConnectionBetweenUsers\x12\x30.kic.friends.UpdateConnectionBetweenUsersRequest\x1a+.kic.friends.ConnectionBetweenUsersResponse\x12\x83\x01\n\x1c\x44\x65leteConnectionBetweenUsers\x12\x30.kic.friends.DeleteConnectionBetweenUsersRequest\x1a\x31.kic.friends.DeleteConnectionBetweenUsersResponseB\x17Z\x15./proto/friends;protob\x06proto3'
   ,
   dependencies=[proto_dot_common__pb2.DESCRIPTOR,])
 
@@ -413,6 +413,77 @@ _CREATECONNECTIONFORUSERSRESPONSE = _descriptor.Descriptor(
   serialized_end=1048,
 )
 
+
+_ADDAWAITINGFRIENDREQUEST = _descriptor.Descriptor(
+  name='AddAwaitingFriendRequest',
+  full_name='kic.friends.AddAwaitingFriendRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='firstUserID', full_name='kic.friends.AddAwaitingFriendRequest.firstUserID', index=0,
+      number=1, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, json_name='firstUserID', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='secondUserID', full_name='kic.friends.AddAwaitingFriendRequest.secondUserID', index=1,
+      number=2, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, json_name='secondUserID', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1050,
+  serialized_end=1146,
+)
+
+
+_ADDAWAITINGFRIENDRESPONSE = _descriptor.Descriptor(
+  name='AddAwaitingFriendResponse',
+  full_name='kic.friends.AddAwaitingFriendResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='success', full_name='kic.friends.AddAwaitingFriendResponse.success', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, json_name='success', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1148,
+  serialized_end=1201,
+)
+
 _GETFRIENDSFORUSERREQUEST.fields_by_name['user'].message_type = proto_dot_common__pb2._USER
 _GETRECOMMENDATIONSFORUSERREQUEST.fields_by_name['user'].message_type = proto_dot_common__pb2._USER
 _GETRECOMMENDATIONSFORUSERRESPONSE.fields_by_name['recommendations'].message_type = proto_dot_common__pb2._USER
@@ -427,6 +498,8 @@ DESCRIPTOR.message_types_by_name['DeleteConnectionBetweenUsersRequest'] = _DELET
 DESCRIPTOR.message_types_by_name['DeleteConnectionBetweenUsersResponse'] = _DELETECONNECTIONBETWEENUSERSRESPONSE
 DESCRIPTOR.message_types_by_name['CreateConnectionForUsersRequest'] = _CREATECONNECTIONFORUSERSREQUEST
 DESCRIPTOR.message_types_by_name['CreateConnectionForUsersResponse'] = _CREATECONNECTIONFORUSERSRESPONSE
+DESCRIPTOR.message_types_by_name['AddAwaitingFriendRequest'] = _ADDAWAITINGFRIENDREQUEST
+DESCRIPTOR.message_types_by_name['AddAwaitingFriendResponse'] = _ADDAWAITINGFRIENDRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 GetFriendsForUserRequest = _reflection.GeneratedProtocolMessageType('GetFriendsForUserRequest', (_message.Message,), {
@@ -506,6 +579,20 @@ CreateConnectionForUsersResponse = _reflection.GeneratedProtocolMessageType('Cre
   })
 _sym_db.RegisterMessage(CreateConnectionForUsersResponse)
 
+AddAwaitingFriendRequest = _reflection.GeneratedProtocolMessageType('AddAwaitingFriendRequest', (_message.Message,), {
+  'DESCRIPTOR' : _ADDAWAITINGFRIENDREQUEST,
+  '__module__' : 'proto.friends_pb2'
+  # @@protoc_insertion_point(class_scope:kic.friends.AddAwaitingFriendRequest)
+  })
+_sym_db.RegisterMessage(AddAwaitingFriendRequest)
+
+AddAwaitingFriendResponse = _reflection.GeneratedProtocolMessageType('AddAwaitingFriendResponse', (_message.Message,), {
+  'DESCRIPTOR' : _ADDAWAITINGFRIENDRESPONSE,
+  '__module__' : 'proto.friends_pb2'
+  # @@protoc_insertion_point(class_scope:kic.friends.AddAwaitingFriendResponse)
+  })
+_sym_db.RegisterMessage(AddAwaitingFriendResponse)
+
 
 DESCRIPTOR._options = None
 
@@ -516,8 +603,8 @@ _FRIENDS = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=1051,
-  serialized_end=1787,
+  serialized_start=1204,
+  serialized_end=2148,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetFriendsForUser',
@@ -530,9 +617,19 @@ _FRIENDS = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
+    name='GetAwaitingFriendsForUser',
+    full_name='kic.friends.Friends.GetAwaitingFriendsForUser',
+    index=1,
+    containing_service=None,
+    input_type=_GETFRIENDSFORUSERREQUEST,
+    output_type=_GETFRIENDSFORUSERRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
     name='GetConnectionBetweenUsers',
     full_name='kic.friends.Friends.GetConnectionBetweenUsers',
-    index=1,
+    index=2,
     containing_service=None,
     input_type=_GETCONNECTIONBETWEENUSERSREQUEST,
     output_type=_CONNECTIONBETWEENUSERSRESPONSE,
@@ -542,7 +639,7 @@ _FRIENDS = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='GetRecommendationsForUser',
     full_name='kic.friends.Friends.GetRecommendationsForUser',
-    index=2,
+    index=3,
     containing_service=None,
     input_type=_GETRECOMMENDATIONSFORUSERREQUEST,
     output_type=_GETRECOMMENDATIONSFORUSERRESPONSE,
@@ -552,7 +649,7 @@ _FRIENDS = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='CreateConnectionForUsers',
     full_name='kic.friends.Friends.CreateConnectionForUsers',
-    index=3,
+    index=4,
     containing_service=None,
     input_type=_CREATECONNECTIONFORUSERSREQUEST,
     output_type=_CREATECONNECTIONFORUSERSRESPONSE,
@@ -560,9 +657,19 @@ _FRIENDS = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
+    name='AddAwaitingFriend',
+    full_name='kic.friends.Friends.AddAwaitingFriend',
+    index=5,
+    containing_service=None,
+    input_type=_ADDAWAITINGFRIENDREQUEST,
+    output_type=_ADDAWAITINGFRIENDRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
     name='UpdateConnectionBetweenUsers',
     full_name='kic.friends.Friends.UpdateConnectionBetweenUsers',
-    index=4,
+    index=6,
     containing_service=None,
     input_type=_UPDATECONNECTIONBETWEENUSERSREQUEST,
     output_type=_CONNECTIONBETWEENUSERSRESPONSE,
@@ -572,7 +679,7 @@ _FRIENDS = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='DeleteConnectionBetweenUsers',
     full_name='kic.friends.Friends.DeleteConnectionBetweenUsers',
-    index=5,
+    index=7,
     containing_service=None,
     input_type=_DELETECONNECTIONBETWEENUSERSREQUEST,
     output_type=_DELETECONNECTIONBETWEENUSERSRESPONSE,

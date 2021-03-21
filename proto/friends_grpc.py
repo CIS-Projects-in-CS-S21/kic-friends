@@ -20,6 +20,10 @@ class FriendsBase(abc.ABC):
         pass
 
     @abc.abstractmethod
+    async def GetAwaitingFriendsForUser(self, stream: 'grpclib.server.Stream[proto.friends_pb2.GetFriendsForUserRequest, proto.friends_pb2.GetFriendsForUserResponse]') -> None:
+        pass
+
+    @abc.abstractmethod
     async def GetConnectionBetweenUsers(self, stream: 'grpclib.server.Stream[proto.friends_pb2.GetConnectionBetweenUsersRequest, proto.friends_pb2.ConnectionBetweenUsersResponse]') -> None:
         pass
 
@@ -29,6 +33,10 @@ class FriendsBase(abc.ABC):
 
     @abc.abstractmethod
     async def CreateConnectionForUsers(self, stream: 'grpclib.server.Stream[proto.friends_pb2.CreateConnectionForUsersRequest, proto.friends_pb2.CreateConnectionForUsersResponse]') -> None:
+        pass
+
+    @abc.abstractmethod
+    async def AddAwaitingFriend(self, stream: 'grpclib.server.Stream[proto.friends_pb2.AddAwaitingFriendRequest, proto.friends_pb2.AddAwaitingFriendResponse]') -> None:
         pass
 
     @abc.abstractmethod
@@ -43,6 +51,12 @@ class FriendsBase(abc.ABC):
         return {
             '/kic.friends.Friends/GetFriendsForUser': grpclib.const.Handler(
                 self.GetFriendsForUser,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                proto.friends_pb2.GetFriendsForUserRequest,
+                proto.friends_pb2.GetFriendsForUserResponse,
+            ),
+            '/kic.friends.Friends/GetAwaitingFriendsForUser': grpclib.const.Handler(
+                self.GetAwaitingFriendsForUser,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 proto.friends_pb2.GetFriendsForUserRequest,
                 proto.friends_pb2.GetFriendsForUserResponse,
@@ -64,6 +78,12 @@ class FriendsBase(abc.ABC):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 proto.friends_pb2.CreateConnectionForUsersRequest,
                 proto.friends_pb2.CreateConnectionForUsersResponse,
+            ),
+            '/kic.friends.Friends/AddAwaitingFriend': grpclib.const.Handler(
+                self.AddAwaitingFriend,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                proto.friends_pb2.AddAwaitingFriendRequest,
+                proto.friends_pb2.AddAwaitingFriendResponse,
             ),
             '/kic.friends.Friends/UpdateConnectionBetweenUsers': grpclib.const.Handler(
                 self.UpdateConnectionBetweenUsers,
@@ -89,6 +109,12 @@ class FriendsStub:
             proto.friends_pb2.GetFriendsForUserRequest,
             proto.friends_pb2.GetFriendsForUserResponse,
         )
+        self.GetAwaitingFriendsForUser = grpclib.client.UnaryUnaryMethod(
+            channel,
+            '/kic.friends.Friends/GetAwaitingFriendsForUser',
+            proto.friends_pb2.GetFriendsForUserRequest,
+            proto.friends_pb2.GetFriendsForUserResponse,
+        )
         self.GetConnectionBetweenUsers = grpclib.client.UnaryUnaryMethod(
             channel,
             '/kic.friends.Friends/GetConnectionBetweenUsers',
@@ -106,6 +132,12 @@ class FriendsStub:
             '/kic.friends.Friends/CreateConnectionForUsers',
             proto.friends_pb2.CreateConnectionForUsersRequest,
             proto.friends_pb2.CreateConnectionForUsersResponse,
+        )
+        self.AddAwaitingFriend = grpclib.client.UnaryUnaryMethod(
+            channel,
+            '/kic.friends.Friends/AddAwaitingFriend',
+            proto.friends_pb2.AddAwaitingFriendRequest,
+            proto.friends_pb2.AddAwaitingFriendResponse,
         )
         self.UpdateConnectionBetweenUsers = grpclib.client.UnaryUnaryMethod(
             channel,
