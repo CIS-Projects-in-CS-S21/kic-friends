@@ -4,7 +4,8 @@ from friends.data.friendslist.mock_repository import MockRepository
 from friends.server import FriendsService
 from proto.friends_pb2 import (GetFriendsForUserRequest,
                                DeleteConnectionBetweenUsersRequest,
-                               CreateConnectionForUsersRequest)
+                               CreateConnectionForUsersRequest,
+                               AddAwaitingFriendRequest)
 from proto.common_pb2 import User
 
 
@@ -23,6 +24,10 @@ class TestFriendRelationships(unittest.TestCase):
                 25: [5, 10],
                 30: [35],
                 35: [30],
+            },
+            {
+                65: {70},
+                70: {65}
             }
         )
         cls.server = FriendsService(
@@ -127,3 +132,37 @@ class TestFriendRelationships(unittest.TestCase):
             )
         )
         self.assertFalse(success.success)
+
+    def test_get_awaiting_friend(self):
+        res = self.server.get_user_awaiting_friends_from_cache(GetFriendsForUserRequest(
+                user=User(
+                    userID=65,
+                )
+            )
+        )
+        self.assertListEqual(list(res.friends), [70])
+
+    def test_add_awaiting_friend(self):
+        success = self.server.add_awaiting_friend_to_cache(
+            AddAwaitingFriendRequest(
+                firstUserID=90,
+                secondUserID=95,
+            )
+        )
+        self.assertTrue(success.success)
+        u1_friends_list = list(self.server.get_user_awaiting_friends_from_cache(
+            GetFriendsForUserRequest(
+                user=User(
+                    userID=90,
+                )
+            )
+        ).friends)
+        u2_friends_list = list(self.server.get_user_awaiting_friends_from_cache(
+            GetFriendsForUserRequest(
+                user=User(
+                    userID=95,
+                )
+            )
+        ).friends)
+        self.assertListEqual(u1_friends_list, [95])
+        self.assertListEqual(u2_friends_list, [90])

@@ -11,12 +11,10 @@ async def main(*, host='0.0.0.0', port=50051):
     if os.getenv("PROD") is None:
         db_name = "kic-friends-test"
         logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(name)s %(lineno)d %(levelname)s:%(message)s')
-        logger = logging.getLogger(__name__)
-        logger.info("Running test")
     else:
         db_name = "kic-friends-prod"
         logging.basicConfig(level=logging.INFO, format='%(asctime)s %(name)s %(lineno)d %(levelname)s:%(message)s')
-        logger = logging.getLogger(__name__)
+    logger = logging.getLogger(__name__)
     db = MongoRepository(
         db_name
     )
