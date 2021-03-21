@@ -10,9 +10,11 @@ from grpclib.server import Server
 async def main(*, host='0.0.0.0', port=50051):
     if os.getenv("PROD") is None:
         db_name = "kic-friends-test"
+        users_service_url = "test.api.keeping-it-casual.com"
         logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(name)s %(lineno)d %(levelname)s:%(message)s')
     else:
         db_name = "kic-friends-prod"
+        users_service_url = "api.keeping-it-casual.com"
         logging.basicConfig(level=logging.INFO, format='%(asctime)s %(name)s %(lineno)d %(levelname)s:%(message)s')
     logger = logging.getLogger(__name__)
     db = MongoRepository(
@@ -20,7 +22,11 @@ async def main(*, host='0.0.0.0', port=50051):
     )
 
     logger.info("Starting server")
-    server = Server([FriendsService(db)])
+    friends_service = FriendsService(
+        db,
+        users_service_url
+    )
+    server = Server([friends_service])
     await server.start(host, port)
     await server.wait_closed()
 
