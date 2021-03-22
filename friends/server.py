@@ -14,8 +14,9 @@ logger = logging.getLogger(__name__)
 
 class FriendsService(FriendsBase):
 
-    def __init__(self, repo: Repository, users_service_url):
-        self.db = repo
+    def __init__(self, db_repo, graph_repo, users_service_url):
+        self.db = db_repo
+        self.graph = graph_repo
         self.users_service_url = users_service_url
 
     def get_user_awaiting_friends_from_cache(self,

@@ -44,3 +44,8 @@ spec:
                 secretKeyRef:
                   name: mongo-uri
                   key: mongo-uri
+            - name: NEO4J_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: graph-neo4j-secrets
+                  key: neo4j-password

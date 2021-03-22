@@ -2,12 +2,17 @@ import asyncio
 import os
 import logging
 
+from neomodel import config
+from grpclib.server import Server
+
 from friends.data.friendslist.mongo_repository import MongoRepository
 from friends.server import FriendsService
-from grpclib.server import Server
+from friends.data.friendsgraph.neo4j_repository import Neo4jRepository
 
 
 async def main(*, host='0.0.0.0', port=50051):
+    config.DATABASE_URL = f"bolt://neo4j:{os.environ['NEO4J_PASSWORD']}@graph-neo4j:7687"
+
     if os.getenv("PROD") is None:
         db_name = "kic-friends-test"
         users_service_url = "test.api.keeping-it-casual.com"
@@ -20,10 +25,12 @@ async def main(*, host='0.0.0.0', port=50051):
     db = MongoRepository(
         db_name
     )
+    rep = Neo4jRepository()
 
     logger.info("Starting server")
     friends_service = FriendsService(
         db,
+        rep,
         users_service_url
     )
     server = Server([friends_service])
