@@ -18,3 +18,7 @@ class Repository(abc.ABC):
     @abc.abstractmethod
     def get_connection(self, uid: int, friend_uid: int):
         pass
+
+    @abc.abstractmethod
+    def get_friends(self, uid: int) -> 'List[int]':
+        pass
