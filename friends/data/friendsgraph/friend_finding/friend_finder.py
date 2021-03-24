@@ -37,7 +37,7 @@ class FriendFinder:
         }
 
         # currently just a heap queue, technically fibonacci is faster but that's only with a large number of
-        # nodes since it has a lot of overhead... also programming time
+        # nodes since it has a lot of overhead... also programming time is a cost
         priority_q = HeapQueue()
 
         priority_q.insert(starting_node_id, 0)
@@ -52,6 +52,15 @@ class FriendFinder:
 
         # I assume this can be done better than a sort with DP but that's an optimization for later
         # if this is an issue
-        nodes = distances.keys()
-        nodes.sort(key=lambda x: distances[x])
-        return nodes
+        nodes = list(distances.keys())
+        nodes.sort(key=lambda x: distances[x], reverse=True)
+
+        recs = list()
+        while len(recs) < num_recommendations and len(nodes) > 0:
+            user_id = nodes.pop()
+            # check if the node is either the target or they are already friends
+            if not (target_uid == user_id or self.graph.get_connection(target_uid, user_id) is not None):
+                recs.append(user_id)
+        return recs
+
+

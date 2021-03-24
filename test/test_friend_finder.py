@@ -49,4 +49,7 @@ class TestFriendFinder(unittest.TestCase):
         self.assertEqual(d[5], 2.2)
         self.assertEqual(d[6], 2.3)
 
+    def testGetRecommendations(self):
+        d = self.finder.get_recommendations(2, 0)
+        self.assertListEqual(d, [4, 5])
 

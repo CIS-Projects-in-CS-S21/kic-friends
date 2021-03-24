@@ -19,7 +19,7 @@ class MockGraph(Repository):
         self.adjacency_list.setdefault(friend_uid, {})[uid] *= multiplier
 
     def get_connection(self, uid: int, friend_uid: int):
-        return self.adjacency_list.get(uid)[friend_uid]
+        return self.adjacency_list.get(uid).get(friend_uid, None)
 
     def get_friends(self, uid: int) -> 'List[int]':
         return self.adjacency_list.get(uid).keys()
