@@ -65,3 +65,18 @@ class Neo4jRepository(Repository):
             logger.info(f"User searched for {uid} {friend_uid} but does not exist, or no relationship")
             return None
         return conn.Strength
+
+    @db.transaction
+    def get_friends(self, uid: int) -> 'List[int]':
+        try:
+            user = User.nodes.first(UserID=uid)
+        except DoesNotExist as err:
+            logger.error(f"Asked to get friends for non-existant user {err}")
+            return None
+        friend_ids = list()
+        logger.debug(f"user friends: {user.friends}")
+        for friend in user.friends:
+            friend_ids.append(friend.UserID)
+        return friend_ids
+
+
