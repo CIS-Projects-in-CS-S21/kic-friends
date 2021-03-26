@@ -30,6 +30,8 @@ async def asyncSetUp(tests):
         25: [5, 10],
         30: [35],
         35: [30],
+        102: [],
+        103: [],
     }
     for uid in repo:
         for f_uid in repo[uid]:
@@ -45,6 +47,10 @@ async def asyncSetUp(tests):
             secondUserID=70,
         )
     )
+
+    location = 'test.api.keeping-it-casual.com'
+
+    channel = Channel(location, 50051)
 
     users_client = UsersStub(channel)
 
@@ -93,6 +99,112 @@ async def asyncSetUp(tests):
                 )
             )
 
+    # this sets up a graph that was predrawn and checked with a manual run of the algorithm
+    await tests.client.CreateConnectionForUsers(
+        CreateConnectionForUsersRequest(
+            firstUserID=1000,
+            secondUserID=1001,
+        )
+    )
+    await tests.client.CreateConnectionForUsers(
+        CreateConnectionForUsersRequest(
+            firstUserID=1000,
+            secondUserID=1002,
+        )
+    )
+    await tests.client.CreateConnectionForUsers(
+        CreateConnectionForUsersRequest(
+            firstUserID=1000,
+            secondUserID=1003,
+        )
+    )
+    await tests.client.CreateConnectionForUsers(
+        CreateConnectionForUsersRequest(
+            firstUserID=1001,
+            secondUserID=1002,
+        )
+    )
+    await tests.client.CreateConnectionForUsers(
+        CreateConnectionForUsersRequest(
+            firstUserID=1002,
+            secondUserID=1004,
+        )
+    )
+    await tests.client.CreateConnectionForUsers(
+        CreateConnectionForUsersRequest(
+            firstUserID=1002,
+            secondUserID=1003,
+        )
+    )
+    await tests.client.CreateConnectionForUsers(
+        CreateConnectionForUsersRequest(
+            firstUserID=1003,
+            secondUserID=1004,
+        )
+    )
+    await tests.client.CreateConnectionForUsers(
+        CreateConnectionForUsersRequest(
+            firstUserID=1004,
+            secondUserID=1005,
+        )
+    )
+    await tests.client.CreateConnectionForUsers(
+        CreateConnectionForUsersRequest(
+            firstUserID=1004,
+            secondUserID=1006,
+        )
+    )
+
+    await tests.client.UpdateConnectionBetweenUsers(
+        UpdateConnectionBetweenUsersRequest(
+            firstUserID=1000,
+            secondUserID=1002,
+            updateValue=1.5
+        )
+    )
+    await tests.client.UpdateConnectionBetweenUsers(
+        UpdateConnectionBetweenUsersRequest(
+            firstUserID=1000,
+            secondUserID=1003,
+            updateValue=0.5
+        )
+    )
+    await tests.client.UpdateConnectionBetweenUsers(
+        UpdateConnectionBetweenUsersRequest(
+            firstUserID=1001,
+            secondUserID=1002,
+            updateValue=0.4
+        )
+    )
+    await tests.client.UpdateConnectionBetweenUsers(
+        UpdateConnectionBetweenUsersRequest(
+            firstUserID=1002,
+            secondUserID=1003,
+            updateValue=0.8
+        )
+    )
+    await tests.client.UpdateConnectionBetweenUsers(
+        UpdateConnectionBetweenUsersRequest(
+            firstUserID=1003,
+            secondUserID=1004,
+            updateValue=1.5
+        )
+    )
+    await tests.client.UpdateConnectionBetweenUsers(
+        UpdateConnectionBetweenUsersRequest(
+            firstUserID=1004,
+            secondUserID=1005,
+            updateValue=0.2
+        )
+    )
+    await tests.client.UpdateConnectionBetweenUsers(
+        UpdateConnectionBetweenUsersRequest(
+            firstUserID=1004,
+            secondUserID=1006,
+            updateValue=0.3
+        )
+    )
+
 
 class IntegrationTests(unittest.IsolatedAsyncioTestCase):
     client: FriendsStub = None
@@ -116,7 +228,7 @@ class IntegrationTests(unittest.IsolatedAsyncioTestCase):
     async def test_get_nonexisting_friends_list(self):
         resp = await self.client.GetFriendsForUser(GetFriendsForUserRequest(
             user=User(
-                userID=1000,
+                userID=900,
                 userName="test",
                 email="test",
             )
@@ -262,6 +374,70 @@ class IntegrationTests(unittest.IsolatedAsyncioTestCase):
         friends = sorted(list(res.friends))
         self.assertListEqual(friends, ["testuser3"])
 
+    async def test_get_connection_between_existing_friends(self):
+        res = await self.client.GetConnectionBetweenUsers(
+            GetConnectionBetweenUsersRequest(
+                firstUserID=30,
+                secondUserID=35,
+            )
+        )
+        self.assertEqual(res.connectionStrength, 1.0)
+
+    async def test_get_connection_between_not_existing_friends(self):
+        with self.assertRaises(GRPCError) as context:
+            await self.client.GetConnectionBetweenUsers(
+                GetConnectionBetweenUsersRequest(
+                    firstUserID=102,
+                    secondUserID=103,
+                )
+            )
+
+        self.assertTrue(context.exception is not None)
+
+    async def test_update_connection_between_existing_friends(self):
+        res = await self.client.UpdateConnectionBetweenUsers(
+            UpdateConnectionBetweenUsersRequest(
+                firstUserID=20,
+                secondUserID=25,
+                updateValue=0.5
+            )
+        )
+        self.assertEqual(res.connectionStrength, 0.5)
+        res = await self.client.GetConnectionBetweenUsers(
+            GetConnectionBetweenUsersRequest(
+                firstUserID=20,
+                secondUserID=25,
+            )
+        )
+        self.assertEqual(res.connectionStrength, 0.5)
+
+    async def test_update_connection_between_not_existing_friends(self):
+        with self.assertRaises(GRPCError) as context:
+            await self.client.GetConnectionBetweenUsers(
+                GetConnectionBetweenUsersRequest(
+                    firstUserID=102,
+                    secondUserID=103,
+                )
+            )
+        self.assertTrue(context.exception is not None)
+
+    # TODO: This was tested prior to integrating the user service to get recommendations usernames,
+    # we will need to adjust and create a friend graph of test users
+    async def test_get_recommendations_for_user(self):
+        res = await self.client.GetRecommendationsForUser(
+            GetRecommendationsForUserRequest(
+                user=User(
+                    userID=1000,
+                ),
+                numberRecommendations=2
+            ),
+            metadata={"authorization": f"Bearer {self.token}"}
+        )
+        recommendations_list = res.recommendations
+        self.assertEqual(len(recommendations_list), 2)
+        self.assertEqual(recommendations_list[0].userID, 1004)
+        self.assertEqual(recommendations_list[1].userID, 1005)
+
 
 async def main():
     t = IntegrationTests()
@@ -276,6 +452,11 @@ async def main():
     await t.test_add_friend_already_existing()
     await t.test_add_awaiting_friend()
     await t.test_get_awaiting_friend()
+    await t.test_get_connection_between_existing_friends()
+    await t.test_get_connection_between_not_existing_friends()
+    await t.test_update_connection_between_existing_friends()
+    await t.test_update_connection_between_not_existing_friends()
+    await t.test_get_recommendations_for_user()
 
 
 if __name__ == '__main__':

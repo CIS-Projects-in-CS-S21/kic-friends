@@ -100,7 +100,7 @@ class TestFriendRelationships(unittest.TestCase):
         self.assertFalse(success)
 
     def test_add_friend_existing(self):
-        success = self.server.add_friend_to_cache(
+        success = self.server.add_friend(
             CreateConnectionForUsersRequest(
                 firstUserID=20,
                 secondUserID=25,
@@ -125,7 +125,7 @@ class TestFriendRelationships(unittest.TestCase):
         self.assertListEqual(u2_friends_list, [5, 10, 20])
 
     def test_add_friend_already_existing(self):
-        success = self.server.add_friend_to_cache(
+        success = self.server.add_friend(
             CreateConnectionForUsersRequest(
                 firstUserID=30,
                 secondUserID=35,

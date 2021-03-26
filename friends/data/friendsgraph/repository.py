@@ -4,19 +4,19 @@ import abc
 class Repository(abc.ABC):
 
     @abc.abstractmethod
-    def create_connection(self, uid: int, friend_uid: int):
+    def create_connection(self, uid: int, friend_uid: int) -> bool:
         pass
 
     @abc.abstractmethod
-    def delete_connection(self, uid: int, friend_uid: int):
+    def delete_connection(self, uid: int, friend_uid: int) -> bool:
         pass
 
     @abc.abstractmethod
-    def update_connection(self, uid: int, friend_uid: int, multiplier: float):
+    def update_connection(self, uid: int, friend_uid: int, multiplier: float) -> float:
         pass
 
     @abc.abstractmethod
-    def get_connection(self, uid: int, friend_uid: int):
+    def get_connection(self, uid: int, friend_uid: int) -> float:
         pass
 
     @abc.abstractmethod

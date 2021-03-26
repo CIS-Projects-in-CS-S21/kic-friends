@@ -11,6 +11,7 @@ from friends.data.friendsgraph.neo4j_repository import Neo4jRepository
 
 
 async def main(*, host='0.0.0.0', port=50051):
+    # only one possible neo4j db at a time, will need to share for prod and test
     config.DATABASE_URL = f"bolt://neo4j:{os.environ['NEO4J_PASSWORD']}@graph-neo4j:7687"
 
     if os.getenv("PROD") is None:
