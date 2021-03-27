@@ -41,7 +41,7 @@ class Neo4jRepository(Repository):
         return True
 
     @db.transaction
-    def update_connection(self, uid: int, friend_uid: int, multiplier: float) -> bool:
+    def update_connection(self, uid: int, friend_uid: int, multiplier: float) -> float:
         try:
             u1 = User.nodes.first(UserID=uid)
             u2 = User.nodes.first(UserID=friend_uid)
@@ -51,17 +51,15 @@ class Neo4jRepository(Repository):
         except DoesNotExist as err:
             logger.info(err)
             logger.info(f"User searched for {uid} {friend_uid} but does not exist, or no relationship")
-            return False
-        return True
+            return None
+        return conn.Strength
 
     @db.transaction
     def get_connection(self, uid: int, friend_uid: int) -> float:
-        try:
-            u1 = User.nodes.first(UserID=uid)
-            u2 = User.nodes.first(UserID=friend_uid)
-            conn = u1.friends.relationship(u2)
-        except DoesNotExist as err:
-            logger.info(err)
+        u1 = User.nodes.first(UserID=uid)
+        u2 = User.nodes.first(UserID=friend_uid)
+        conn = u1.friends.relationship(u2)
+        if not conn:
             logger.info(f"User searched for {uid} {friend_uid} but does not exist, or no relationship")
             return None
         return conn.Strength

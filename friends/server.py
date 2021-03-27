@@ -3,9 +3,12 @@ import logging
 from grpclib import GRPCError, Status
 from grpclib.client import Channel
 
+from proto.common_pb2 import User
 from proto.friends_pb2 import *
 from proto.friends_grpc import *
-from friends.data.friendslist.repository import Repository
+from friends.data.friendslist.repository import Repository as DBRepo
+from friends.data.friendsgraph.repository import Repository as GraphRepo
+from friends.data.friendsgraph.friend_finding.friend_finder import FriendFinder
 from proto.users_grpc import UsersStub
 from proto.users_pb2 import GetUserNameByIDRequest
 
@@ -14,10 +17,11 @@ logger = logging.getLogger(__name__)
 
 class FriendsService(FriendsBase):
 
-    def __init__(self, db_repo, graph_repo, users_service_url):
+    def __init__(self, db_repo: DBRepo, graph_repo: GraphRepo, users_service_url: str):
         self.db = db_repo
         self.graph = graph_repo
         self.users_service_url = users_service_url
+        self.friend_finder = FriendFinder(self.graph)
 
     def get_user_awaiting_friends_from_cache(self,
                                              req: 'GetFriendsForUserRequest'
@@ -37,24 +41,26 @@ class FriendsService(FriendsBase):
             friends=res
         )
 
-    def delete_friend_from_cache(self,
-                                 req: 'DeleteConnectionBetweenUsersRequest'
-                                 ) -> bool:
+    def delete_friend(self,
+                      req: 'DeleteConnectionBetweenUsersRequest'
+                      ) -> bool:
         uid1 = req.firstUserID
         uid2 = req.secondUserID
         success1 = self.db.delete_friend_for_uid(uid1, uid2)
         success2 = self.db.delete_friend_for_uid(uid2, uid1)
-        return success1 and success2
+        graph_success = self.graph.delete_connection(uid1, uid2)
+        return success1 and success2 and graph_success
 
-    def add_friend_to_cache(self,
-                            req: 'CreateConnectionForUsersRequest'
-                            ) -> 'CreateConnectionForUsersResponse':
+    def add_friend(self,
+                   req: 'CreateConnectionForUsersRequest'
+                   ) -> 'CreateConnectionForUsersResponse':
         uid1 = req.firstUserID
         uid2 = req.secondUserID
         success1 = self.db.add_friend_to_list_for_uid(uid1, uid2)
         success2 = self.db.add_friend_to_list_for_uid(uid2, uid1)
+        success3 = self.graph.create_connection(uid1, uid2)
         return CreateConnectionForUsersResponse(
-            success=(success1 and success2)
+            success=(success1 and success2 and success3)
         )
 
     def add_awaiting_friend_to_cache(self,
@@ -87,7 +93,6 @@ class FriendsService(FriendsBase):
                 except GRPCError as error:
                     logger.info(f"User service error: {error.status} {error.message}")
         return user_names
-
 
     ######## RPC Handlers ########
 
@@ -144,14 +149,53 @@ class FriendsService(FriendsBase):
                                                 'GetConnectionBetweenUsersRequest, '
                                                 'ConnectionBetweenUsersResponse]'
                                         ) -> None:
-        pass
+        request = await stream.recv_message()
+        strength = self.graph.get_connection(request.firstUserID, request.secondUserID)
+        if strength is None:
+            raise GRPCError(
+                Status.NOT_FOUND,
+                'Could not find one of the requested users',
+                [],
+            )
+        res = ConnectionBetweenUsersResponse(
+            connectionStrength=strength
+        )
+        await stream.send_message(res)
 
     async def GetRecommendationsForUser(self,
                                         stream: 'grpclib.server.Stream['
                                                 'GetRecommendationsForUserRequest, '
                                                 'GetRecommendationsForUserResponse]'
                                         ) -> None:
-        pass
+        logger.debug("Received request to GetRecommendationsForUser")
+        request = await stream.recv_message()
+        uid = request.user.userID
+        num_recs = request.numberRecommendations
+        recs = self.friend_finder.get_recommendations(num_recs, uid)
+
+        user_object_list = list()
+
+        auth = stream.metadata["authorization"]
+        user_names = await self.get_usernames_from_user_service(auth, recs)
+
+        if len(user_names) != len(recs):
+            raise GRPCError(
+                Status.INTERNAL,
+                'An inconsistency exists for one or more users',
+                [],
+            )
+        for name, uid in zip(user_names, recs):
+            user_object_list.append(
+                User(
+                    userID=uid,
+                    userName=name,
+                )
+            )
+
+        res = GetRecommendationsForUserResponse(
+            recommendations=user_object_list
+        )
+        await stream.send_message(res)
 
     async def CreateConnectionForUsers(self,
                                        stream: 'grpclib.server.Stream['
@@ -160,7 +204,7 @@ class FriendsService(FriendsBase):
                                        ) -> None:
         logger.debug("Received request to CreateConnectionForUsers")
         request = await stream.recv_message()
-        res = self.add_friend_to_cache(request)
+        res = self.add_friend(request)
         await stream.send_message(res)
 
     async def UpdateConnectionBetweenUsers(self,
@@ -168,15 +212,24 @@ class FriendsService(FriendsBase):
                                                    'UpdateConnectionBetweenUsersRequest, '
                                                    'ConnectionBetweenUsersResponse]'
                                            ) -> None:
-        pass
+        logger.debug("Received request to UpdateConnectionBetweenUsers")
+        request = await stream.recv_message()
+        uid1 = request.firstUserID
+        uid2 = request.secondUserID
+        strength = self.graph.update_connection(uid1, uid2, request.updateValue)
+        res = ConnectionBetweenUsersResponse(
+            connectionStrength=strength
+        )
+        await stream.send_message(res)
 
     async def DeleteConnectionBetweenUsers(self,
                                            stream: 'grpclib.server.Stream['
                                                    'DeleteConnectionBetweenUsersRequest, '
                                                    'DeleteConnectionBetweenUsersResponse]'
                                            ) -> None:
+        logger.debug("Received request to DeleteConnectionBetweenUsers")
         request = await stream.recv_message()
-        success = self.delete_friend_from_cache(request)
+        success = self.delete_friend(request)
         if success:
             await stream.send_message(DeleteConnectionBetweenUsersResponse())
             return
