@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'Z\024./proto/common;proto',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x12proto/common.proto\x12\nkic.common\"P\n\x04User\x12\x16\n\x06userID\x18\x01 \x01(\x03R\x06userID\x12\x1a\n\x08userName\x18\x02 \x01(\tR\x08userName\x12\x14\n\x05\x65mail\x18\x03 \x01(\tR\x05\x65mail\"\xf1\x01\n\x04\x46ile\x12\x1a\n\x08\x66ileName\x18\x01 \x01(\tR\x08\x66ileName\x12\"\n\x0c\x66ileLocation\x18\x02 \x01(\tR\x0c\x66ileLocation\x12:\n\x08metadata\x18\x03 \x03(\x0b\x32\x1e.kic.common.File.MetadataEntryR\x08metadata\x12\x30\n\ndateStored\x18\x04 \x01(\x0b\x32\x10.kic.common.DateR\ndateStored\x1a;\n\rMetadataEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n\x05value\x18\x02 \x01(\tR\x05value:\x02\x38\x01\"B\n\x04\x44\x61te\x12\x12\n\x04year\x18\x01 \x01(\x05R\x04year\x12\x14\n\x05month\x18\x02 \x01(\x05R\x05month\x12\x10\n\x03\x64\x61y\x18\x03 \x01(\x05R\x03\x64\x61yB\x16Z\x14./proto/common;protob\x06proto3'
+  serialized_pb=b'\n\x12proto/common.proto\x12\nkic.common\"\xa4\x01\n\x04User\x12\x16\n\x06userID\x18\x01 \x01(\x03R\x06userID\x12\x1a\n\x08userName\x18\x02 \x01(\tR\x08userName\x12\x14\n\x05\x65mail\x18\x03 \x01(\tR\x05\x65mail\x12,\n\x08\x62irthday\x18\x04 \x01(\x0b\x32\x10.kic.common.DateR\x08\x62irthday\x12\x12\n\x04\x63ity\x18\x05 \x01(\tR\x04\x63ity\x12\x10\n\x03\x62io\x18\x06 \x01(\tR\x03\x62io\"\xf1\x01\n\x04\x46ile\x12\x1a\n\x08\x66ileName\x18\x01 \x01(\tR\x08\x66ileName\x12\"\n\x0c\x66ileLocation\x18\x02 \x01(\tR\x0c\x66ileLocation\x12:\n\x08metadata\x18\x03 \x03(\x0b\x32\x1e.kic.common.File.MetadataEntryR\x08metadata\x12\x30\n\ndateStored\x18\x04 \x01(\x0b\x32\x10.kic.common.DateR\ndateStored\x1a;\n\rMetadataEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n\x05value\x18\x02 \x01(\tR\x05value:\x02\x38\x01\"B\n\x04\x44\x61te\x12\x12\n\x04year\x18\x01 \x01(\x05R\x04year\x12\x14\n\x05month\x18\x02 \x01(\x05R\x05month\x12\x10\n\x03\x64\x61y\x18\x03 \x01(\x05R\x03\x64\x61yB\x16Z\x14./proto/common;protob\x06proto3'
 )
 
 
@@ -54,6 +54,27 @@ _USER = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, json_name='email', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='birthday', full_name='kic.common.User.birthday', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, json_name='birthday', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='city', full_name='kic.common.User.city', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, json_name='city', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='bio', full_name='kic.common.User.bio', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, json_name='bio', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -66,8 +87,8 @@ _USER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=34,
-  serialized_end=114,
+  serialized_start=35,
+  serialized_end=199,
 )
 
 
@@ -105,8 +126,8 @@ _FILE_METADATAENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=299,
-  serialized_end=358,
+  serialized_start=384,
+  serialized_end=443,
 )
 
 _FILE = _descriptor.Descriptor(
@@ -157,8 +178,8 @@ _FILE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=117,
-  serialized_end=358,
+  serialized_start=202,
+  serialized_end=443,
 )
 
 
@@ -203,10 +224,11 @@ _DATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=360,
-  serialized_end=426,
+  serialized_start=445,
+  serialized_end=511,
 )
 
+_USER.fields_by_name['birthday'].message_type = _DATE
 _FILE_METADATAENTRY.containing_type = _FILE
 _FILE.fields_by_name['metadata'].message_type = _FILE_METADATAENTRY
 _FILE.fields_by_name['dateStored'].message_type = _DATE

@@ -32,10 +32,6 @@ class MediaStorageBase(abc.ABC):
         pass
 
     @abc.abstractmethod
-    async def AddCommentToFile(self, stream: 'grpclib.server.Stream[proto.media_pb2.AddCommentToFileRequest, proto.media_pb2.AddCommentToFileResponse]') -> None:
-        pass
-
-    @abc.abstractmethod
     async def GetFilesWithMetadata(self, stream: 'grpclib.server.Stream[proto.media_pb2.GetFilesByMetadataRequest, proto.media_pb2.GetFilesByMetadataResponse]') -> None:
         pass
 
@@ -68,12 +64,6 @@ class MediaStorageBase(abc.ABC):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 proto.media_pb2.UpdateFilesWithMetadataRequest,
                 proto.media_pb2.UpdateFilesWithMetadataResponse,
-            ),
-            '/kic.media.MediaStorage/AddCommentToFile': grpclib.const.Handler(
-                self.AddCommentToFile,
-                grpclib.const.Cardinality.UNARY_UNARY,
-                proto.media_pb2.AddCommentToFileRequest,
-                proto.media_pb2.AddCommentToFileResponse,
             ),
             '/kic.media.MediaStorage/GetFilesWithMetadata': grpclib.const.Handler(
                 self.GetFilesWithMetadata,
@@ -116,12 +106,6 @@ class MediaStorageStub:
             '/kic.media.MediaStorage/UpdateFilesWithMetadata',
             proto.media_pb2.UpdateFilesWithMetadataRequest,
             proto.media_pb2.UpdateFilesWithMetadataResponse,
-        )
-        self.AddCommentToFile = grpclib.client.UnaryUnaryMethod(
-            channel,
-            '/kic.media.MediaStorage/AddCommentToFile',
-            proto.media_pb2.AddCommentToFileRequest,
-            proto.media_pb2.AddCommentToFileResponse,
         )
         self.GetFilesWithMetadata = grpclib.client.UnaryUnaryMethod(
             channel,

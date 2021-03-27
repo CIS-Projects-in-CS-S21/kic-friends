@@ -21,10 +21,36 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'Z\023./proto/media;proto',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x11proto/media.proto\x12\tkic.media\x1a\x12proto/common.proto\"c\n\x11UploadFileRequest\x12.\n\x08\x66ileInfo\x18\x01 \x01(\x0b\x32\x10.kic.common.FileH\x00R\x08\x66ileInfo\x12\x16\n\x05\x63hunk\x18\x02 \x01(\x0cH\x00R\x05\x63hunkB\x06\n\x04\x64\x61ta\"J\n\x12UploadFileResponse\x12\x16\n\x06\x66ileID\x18\x01 \x01(\tR\x06\x66ileID\x12\x1c\n\tbytesRead\x18\x02 \x01(\x04R\tbytesRead\"C\n\x13\x43heckForFileRequest\x12,\n\x08\x66ileInfo\x18\x01 \x01(\x0b\x32\x10.kic.common.FileR\x08\x66ileInfo\".\n\x14\x43heckForFileResponse\x12\x16\n\x06\x65xists\x18\x01 \x01(\x08R\x06\x65xists\"C\n\x13\x44ownloadFileRequest\x12,\n\x08\x66ileInfo\x18\x01 \x01(\x0b\x32\x10.kic.common.FileR\x08\x66ileInfo\",\n\x14\x44ownloadFileResponse\x12\x14\n\x05\x63hunk\x18\x01 \x01(\x0cR\x05\x63hunk\"\x83\x02\n\x19GetFilesByMetadataRequest\x12\x63\n\x0f\x64\x65siredMetadata\x18\x01 \x03(\x0b\x32\x39.kic.media.GetFilesByMetadataRequest.DesiredMetadataEntryR\x0f\x64\x65siredMetadata\x12=\n\nstrictness\x18\x02 \x01(\x0e\x32\x1d.kic.media.MetadataStrictnessR\nstrictness\x1a\x42\n\x14\x44\x65siredMetadataEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n\x05value\x18\x02 \x01(\tR\x05value:\x02\x38\x01\"L\n\x1aGetFilesByMetadataResponse\x12.\n\tfileInfos\x18\x01 \x03(\x0b\x32\x10.kic.common.FileR\tfileInfos\"\xf1\x01\n\x1e\x44\x65leteFilesWithMetaDataRequest\x12S\n\x08metadata\x18\x01 \x03(\x0b\x32\x37.kic.media.DeleteFilesWithMetaDataRequest.MetadataEntryR\x08metadata\x12=\n\nstrictness\x18\x02 \x01(\x0e\x32\x1d.kic.media.MetadataStrictnessR\nstrictness\x1a;\n\rMetadataEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n\x05value\x18\x02 \x01(\tR\x05value:\x02\x38\x01\";\n\x1f\x44\x65leteFilesWithMetaDataResponse\x12\x18\n\x07success\x18\x01 \x01(\x08R\x07success\"\xb7\x03\n\x1eUpdateFilesWithMetadataRequest\x12h\n\x0f\x64\x65siredMetadata\x18\x01 \x03(\x0b\x32>.kic.media.UpdateFilesWithMetadataRequest.DesiredMetadataEntryR\x0f\x64\x65siredMetadata\x12\x65\n\x0e\x66ilterMetadata\x18\x02 \x03(\x0b\x32=.kic.media.UpdateFilesWithMetadataRequest.FilterMetadataEntryR\x0e\x66ilterMetadata\x12=\n\nstrictness\x18\x03 \x01(\x0e\x32\x1d.kic.media.MetadataStrictnessR\nstrictness\x1a\x42\n\x14\x44\x65siredMetadataEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n\x05value\x18\x02 \x01(\tR\x05value:\x02\x38\x01\x1a\x41\n\x13\x46ilterMetadataEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n\x05value\x18\x02 \x01(\tR\x05value:\x02\x38\x01\"K\n\x1fUpdateFilesWithMetadataResponse\x12(\n\x0fnumFilesUpdated\x18\x01 \x01(\x03R\x0fnumFilesUpdated\"a\n\x17\x41\x64\x64\x43ommentToFileRequest\x12,\n\x11\x63ommenterUsername\x18\x01 \x01(\tR\x11\x63ommenterUsername\x12\x18\n\x07\x63omment\x18\x02 \x01(\tR\x07\x63omment\"4\n\x18\x41\x64\x64\x43ommentToFileResponse\x12\x18\n\x07success\x18\x01 \x01(\x08R\x07success*Z\n\x12MetadataStrictness\x12\n\n\x06STRICT\x10\x00\x12\n\n\x06\x43\x41SUAL\x10\x01\x12\x15\n\x11STRICTLY_OPPOSITE\x10\x02\x12\x15\n\x11\x43\x41SUALLY_OPPOSITE\x10\x03\x32\xb1\x05\n\x0cMediaStorage\x12K\n\nUploadFile\x12\x1c.kic.media.UploadFileRequest\x1a\x1d.kic.media.UploadFileResponse(\x01\x12W\n\x12\x44ownloadFileByName\x12\x1e.kic.media.DownloadFileRequest\x1a\x1f.kic.media.DownloadFileResponse0\x01\x12U\n\x12\x43heckForFileByName\x12\x1e.kic.media.CheckForFileRequest\x1a\x1f.kic.media.CheckForFileResponse\x12p\n\x17UpdateFilesWithMetadata\x12).kic.media.UpdateFilesWithMetadataRequest\x1a*.kic.media.UpdateFilesWithMetadataResponse\x12[\n\x10\x41\x64\x64\x43ommentToFile\x12\".kic.media.AddCommentToFileRequest\x1a#.kic.media.AddCommentToFileResponse\x12\x63\n\x14GetFilesWithMetadata\x12$.kic.media.GetFilesByMetadataRequest\x1a%.kic.media.GetFilesByMetadataResponse\x12p\n\x17\x44\x65leteFilesWithMetaData\x12).kic.media.DeleteFilesWithMetaDataRequest\x1a*.kic.media.DeleteFilesWithMetaDataResponseB\x15Z\x13./proto/media;protob\x06proto3'
+  serialized_pb=b'\n\x11proto/media.proto\x12\tkic.media\x1a\x12proto/common.proto\"c\n\x11UploadFileRequest\x12.\n\x08\x66ileInfo\x18\x01 \x01(\x0b\x32\x10.kic.common.FileH\x00R\x08\x66ileInfo\x12\x16\n\x05\x63hunk\x18\x02 \x01(\x0cH\x00R\x05\x63hunkB\x06\n\x04\x64\x61ta\"J\n\x12UploadFileResponse\x12\x16\n\x06\x66ileID\x18\x01 \x01(\tR\x06\x66ileID\x12\x1c\n\tbytesRead\x18\x02 \x01(\x04R\tbytesRead\"C\n\x13\x43heckForFileRequest\x12,\n\x08\x66ileInfo\x18\x01 \x01(\x0b\x32\x10.kic.common.FileR\x08\x66ileInfo\".\n\x14\x43heckForFileResponse\x12\x16\n\x06\x65xists\x18\x01 \x01(\x08R\x06\x65xists\"C\n\x13\x44ownloadFileRequest\x12,\n\x08\x66ileInfo\x18\x01 \x01(\x0b\x32\x10.kic.common.FileR\x08\x66ileInfo\",\n\x14\x44ownloadFileResponse\x12\x14\n\x05\x63hunk\x18\x01 \x01(\x0cR\x05\x63hunk\"\x83\x02\n\x19GetFilesByMetadataRequest\x12\x63\n\x0f\x64\x65siredMetadata\x18\x01 \x03(\x0b\x32\x39.kic.media.GetFilesByMetadataRequest.DesiredMetadataEntryR\x0f\x64\x65siredMetadata\x12=\n\nstrictness\x18\x02 \x01(\x0e\x32\x1d.kic.media.MetadataStrictnessR\nstrictness\x1a\x42\n\x14\x44\x65siredMetadataEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n\x05value\x18\x02 \x01(\tR\x05value:\x02\x38\x01\"L\n\x1aGetFilesByMetadataResponse\x12.\n\tfileInfos\x18\x01 \x03(\x0b\x32\x10.kic.common.FileR\tfileInfos\"\xf1\x01\n\x1e\x44\x65leteFilesWithMetaDataRequest\x12S\n\x08metadata\x18\x01 \x03(\x0b\x32\x37.kic.media.DeleteFilesWithMetaDataRequest.MetadataEntryR\x08metadata\x12=\n\nstrictness\x18\x02 \x01(\x0e\x32\x1d.kic.media.MetadataStrictnessR\nstrictness\x1a;\n\rMetadataEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n\x05value\x18\x02 \x01(\tR\x05value:\x02\x38\x01\";\n\x1f\x44\x65leteFilesWithMetaDataResponse\x12\x18\n\x07success\x18\x01 \x01(\x08R\x07success\"\xee\x03\n\x1eUpdateFilesWithMetadataRequest\x12h\n\x0f\x64\x65siredMetadata\x18\x01 \x03(\x0b\x32>.kic.media.UpdateFilesWithMetadataRequest.DesiredMetadataEntryR\x0f\x64\x65siredMetadata\x12\x65\n\x0e\x66ilterMetadata\x18\x02 \x03(\x0b\x32=.kic.media.UpdateFilesWithMetadataRequest.FilterMetadataEntryR\x0e\x66ilterMetadata\x12=\n\nstrictness\x18\x03 \x01(\x0e\x32\x1d.kic.media.MetadataStrictnessR\nstrictness\x12\x35\n\nupdateFlag\x18\x04 \x01(\x0e\x32\x15.kic.media.UpdateFlagR\nupdateFlag\x1a\x42\n\x14\x44\x65siredMetadataEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n\x05value\x18\x02 \x01(\tR\x05value:\x02\x38\x01\x1a\x41\n\x13\x46ilterMetadataEntry\x12\x10\n\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n\x05value\x18\x02 \x01(\tR\x05value:\x02\x38\x01\"K\n\x1fUpdateFilesWithMetadataResponse\x12(\n\x0fnumFilesUpdated\x18\x01 \x01(\x03R\x0fnumFilesUpdated*\'\n\nUpdateFlag\x12\r\n\tOVERWRITE\x10\x00\x12\n\n\x06\x41PPEND\x10\x01*Z\n\x12MetadataStrictness\x12\n\n\x06STRICT\x10\x00\x12\n\n\x06\x43\x41SUAL\x10\x01\x12\x15\n\x11STRICTLY_OPPOSITE\x10\x02\x12\x15\n\x11\x43\x41SUALLY_OPPOSITE\x10\x03\x32\xd4\x04\n\x0cMediaStorage\x12K\n\nUploadFile\x12\x1c.kic.media.UploadFileRequest\x1a\x1d.kic.media.UploadFileResponse(\x01\x12W\n\x12\x44ownloadFileByName\x12\x1e.kic.media.DownloadFileRequest\x1a\x1f.kic.media.DownloadFileResponse0\x01\x12U\n\x12\x43heckForFileByName\x12\x1e.kic.media.CheckForFileRequest\x1a\x1f.kic.media.CheckForFileResponse\x12p\n\x17UpdateFilesWithMetadata\x12).kic.media.UpdateFilesWithMetadataRequest\x1a*.kic.media.UpdateFilesWithMetadataResponse\x12\x63\n\x14GetFilesWithMetadata\x12$.kic.media.GetFilesByMetadataRequest\x1a%.kic.media.GetFilesByMetadataResponse\x12p\n\x17\x44\x65leteFilesWithMetaData\x12).kic.media.DeleteFilesWithMetaDataRequest\x1a*.kic.media.DeleteFilesWithMetaDataResponseB\x15Z\x13./proto/media;protob\x06proto3'
   ,
   dependencies=[proto_dot_common__pb2.DESCRIPTOR,])
 
+_UPDATEFLAG = _descriptor.EnumDescriptor(
+  name='UpdateFlag',
+  full_name='kic.media.UpdateFlag',
+  filename=None,
+  file=DESCRIPTOR,
+  create_key=_descriptor._internal_create_key,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='OVERWRITE', index=0, number=0,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='APPEND', index=1, number=1,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=1680,
+  serialized_end=1719,
+)
+_sym_db.RegisterEnumDescriptor(_UPDATEFLAG)
+
+UpdateFlag = enum_type_wrapper.EnumTypeWrapper(_UPDATEFLAG)
 _METADATASTRICTNESS = _descriptor.EnumDescriptor(
   name='MetadataStrictness',
   full_name='kic.media.MetadataStrictness',
@@ -55,12 +81,14 @@ _METADATASTRICTNESS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1778,
-  serialized_end=1868,
+  serialized_start=1721,
+  serialized_end=1811,
 )
 _sym_db.RegisterEnumDescriptor(_METADATASTRICTNESS)
 
 MetadataStrictness = enum_type_wrapper.EnumTypeWrapper(_METADATASTRICTNESS)
+OVERWRITE = 0
+APPEND = 1
 STRICT = 0
 CASUAL = 1
 STRICTLY_OPPOSITE = 2
@@ -569,8 +597,8 @@ _UPDATEFILESWITHMETADATAREQUEST_FILTERMETADATAENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1481,
-  serialized_end=1546,
+  serialized_start=1536,
+  serialized_end=1601,
 )
 
 _UPDATEFILESWITHMETADATAREQUEST = _descriptor.Descriptor(
@@ -602,6 +630,13 @@ _UPDATEFILESWITHMETADATAREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, json_name='strictness', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='updateFlag', full_name='kic.media.UpdateFilesWithMetadataRequest.updateFlag', index=3,
+      number=4, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, json_name='updateFlag', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -615,7 +650,7 @@ _UPDATEFILESWITHMETADATAREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=1107,
-  serialized_end=1546,
+  serialized_end=1601,
 )
 
 
@@ -646,79 +681,8 @@ _UPDATEFILESWITHMETADATARESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1548,
-  serialized_end=1623,
-)
-
-
-_ADDCOMMENTTOFILEREQUEST = _descriptor.Descriptor(
-  name='AddCommentToFileRequest',
-  full_name='kic.media.AddCommentToFileRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='commenterUsername', full_name='kic.media.AddCommentToFileRequest.commenterUsername', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, json_name='commenterUsername', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='comment', full_name='kic.media.AddCommentToFileRequest.comment', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, json_name='comment', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1625,
-  serialized_end=1722,
-)
-
-
-_ADDCOMMENTTOFILERESPONSE = _descriptor.Descriptor(
-  name='AddCommentToFileResponse',
-  full_name='kic.media.AddCommentToFileResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='success', full_name='kic.media.AddCommentToFileResponse.success', index=0,
-      number=1, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, json_name='success', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=1724,
-  serialized_end=1776,
+  serialized_start=1603,
+  serialized_end=1678,
 )
 
 _UPLOADFILEREQUEST.fields_by_name['fileInfo'].message_type = proto_dot_common__pb2._FILE
@@ -742,6 +706,7 @@ _UPDATEFILESWITHMETADATAREQUEST_FILTERMETADATAENTRY.containing_type = _UPDATEFIL
 _UPDATEFILESWITHMETADATAREQUEST.fields_by_name['desiredMetadata'].message_type = _UPDATEFILESWITHMETADATAREQUEST_DESIREDMETADATAENTRY
 _UPDATEFILESWITHMETADATAREQUEST.fields_by_name['filterMetadata'].message_type = _UPDATEFILESWITHMETADATAREQUEST_FILTERMETADATAENTRY
 _UPDATEFILESWITHMETADATAREQUEST.fields_by_name['strictness'].enum_type = _METADATASTRICTNESS
+_UPDATEFILESWITHMETADATAREQUEST.fields_by_name['updateFlag'].enum_type = _UPDATEFLAG
 DESCRIPTOR.message_types_by_name['UploadFileRequest'] = _UPLOADFILEREQUEST
 DESCRIPTOR.message_types_by_name['UploadFileResponse'] = _UPLOADFILERESPONSE
 DESCRIPTOR.message_types_by_name['CheckForFileRequest'] = _CHECKFORFILEREQUEST
@@ -754,8 +719,7 @@ DESCRIPTOR.message_types_by_name['DeleteFilesWithMetaDataRequest'] = _DELETEFILE
 DESCRIPTOR.message_types_by_name['DeleteFilesWithMetaDataResponse'] = _DELETEFILESWITHMETADATARESPONSE
 DESCRIPTOR.message_types_by_name['UpdateFilesWithMetadataRequest'] = _UPDATEFILESWITHMETADATAREQUEST
 DESCRIPTOR.message_types_by_name['UpdateFilesWithMetadataResponse'] = _UPDATEFILESWITHMETADATARESPONSE
-DESCRIPTOR.message_types_by_name['AddCommentToFileRequest'] = _ADDCOMMENTTOFILEREQUEST
-DESCRIPTOR.message_types_by_name['AddCommentToFileResponse'] = _ADDCOMMENTTOFILERESPONSE
+DESCRIPTOR.enum_types_by_name['UpdateFlag'] = _UPDATEFLAG
 DESCRIPTOR.enum_types_by_name['MetadataStrictness'] = _METADATASTRICTNESS
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -875,20 +839,6 @@ UpdateFilesWithMetadataResponse = _reflection.GeneratedProtocolMessageType('Upda
   })
 _sym_db.RegisterMessage(UpdateFilesWithMetadataResponse)
 
-AddCommentToFileRequest = _reflection.GeneratedProtocolMessageType('AddCommentToFileRequest', (_message.Message,), {
-  'DESCRIPTOR' : _ADDCOMMENTTOFILEREQUEST,
-  '__module__' : 'proto.media_pb2'
-  # @@protoc_insertion_point(class_scope:kic.media.AddCommentToFileRequest)
-  })
-_sym_db.RegisterMessage(AddCommentToFileRequest)
-
-AddCommentToFileResponse = _reflection.GeneratedProtocolMessageType('AddCommentToFileResponse', (_message.Message,), {
-  'DESCRIPTOR' : _ADDCOMMENTTOFILERESPONSE,
-  '__module__' : 'proto.media_pb2'
-  # @@protoc_insertion_point(class_scope:kic.media.AddCommentToFileResponse)
-  })
-_sym_db.RegisterMessage(AddCommentToFileResponse)
-
 
 DESCRIPTOR._options = None
 _GETFILESBYMETADATAREQUEST_DESIREDMETADATAENTRY._options = None
@@ -903,8 +853,8 @@ _MEDIASTORAGE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=1871,
-  serialized_end=2560,
+  serialized_start=1814,
+  serialized_end=2410,
   methods=[
   _descriptor.MethodDescriptor(
     name='UploadFile',
@@ -947,19 +897,9 @@ _MEDIASTORAGE = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
-    name='AddCommentToFile',
-    full_name='kic.media.MediaStorage.AddCommentToFile',
-    index=4,
-    containing_service=None,
-    input_type=_ADDCOMMENTTOFILEREQUEST,
-    output_type=_ADDCOMMENTTOFILERESPONSE,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
     name='GetFilesWithMetadata',
     full_name='kic.media.MediaStorage.GetFilesWithMetadata',
-    index=5,
+    index=4,
     containing_service=None,
     input_type=_GETFILESBYMETADATAREQUEST,
     output_type=_GETFILESBYMETADATARESPONSE,
@@ -969,7 +909,7 @@ _MEDIASTORAGE = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='DeleteFilesWithMetaData',
     full_name='kic.media.MediaStorage.DeleteFilesWithMetaData',
-    index=6,
+    index=5,
     containing_service=None,
     input_type=_DELETEFILESWITHMETADATAREQUEST,
     output_type=_DELETEFILESWITHMETADATARESPONSE,

@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'Z\023./proto/users;proto',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x11proto/users.proto\x12\tkic.users\x1a\x12proto/common.proto\"\xbc\x01\n\x0e\x41\x64\x64UserRequest\x12\x14\n\x05\x65mail\x18\x01 \x01(\tR\x05\x65mail\x12(\n\x0f\x64\x65siredUsername\x18\x02 \x01(\tR\x0f\x64\x65siredUsername\x12(\n\x0f\x64\x65siredPassword\x18\x03 \x01(\tR\x0f\x64\x65siredPassword\x12,\n\x08\x62irthday\x18\x04 \x01(\x0b\x32\x10.kic.common.DateR\x08\x62irthday\x12\x12\n\x04\x63ity\x18\x05 \x01(\tR\x04\x63ity\"_\n\x0f\x41\x64\x64UserResponse\x12\x18\n\x07success\x18\x01 \x01(\x08R\x07success\x12\x32\n\x0b\x63reatedUser\x18\x02 \x01(\x0b\x32\x10.kic.common.UserR\x0b\x63reatedUser\"6\n\x18GetUserByUsernameRequest\x12\x1a\n\x08username\x18\x01 \x01(\tR\x08username\"[\n\x19GetUserByUsernameResponse\x12\x18\n\x07success\x18\x01 \x01(\x08R\x07success\x12$\n\x04user\x18\x02 \x01(\x0b\x32\x10.kic.common.UserR\x04user\",\n\x12GetUserByIDRequest\x12\x16\n\x06userID\x18\x01 \x01(\x03R\x06userID\"U\n\x13GetUserByIDResponse\x12\x18\n\x07success\x18\x01 \x01(\x08R\x07success\x12$\n\x04user\x18\x02 \x01(\x0b\x32\x10.kic.common.UserR\x04user\"0\n\x16GetUserNameByIDRequest\x12\x16\n\x06userID\x18\x01 \x01(\x03R\x06userID\"5\n\x17GetUserNameByIDResponse\x12\x1a\n\x08username\x18\x01 \x01(\tR\x08username\"/\n\x15\x44\x65leteUserByIDRequest\x12\x16\n\x06userID\x18\x01 \x01(\x03R\x06userID\"2\n\x16\x44\x65leteUserByIDResponse\x12\x18\n\x07success\x18\x01 \x01(\x08R\x07success\"\xdb\x01\n\x15UpdateUserInfoRequest\x12\x16\n\x06userID\x18\x01 \x01(\x03R\x06userID\x12\x14\n\x05\x65mail\x18\x02 \x01(\tR\x05\x65mail\x12(\n\x0f\x64\x65siredUsername\x18\x03 \x01(\tR\x0f\x64\x65siredUsername\x12(\n\x0f\x64\x65siredPassword\x18\x04 \x01(\tR\x0f\x64\x65siredPassword\x12,\n\x08\x62irthday\x18\x05 \x01(\x0b\x32\x10.kic.common.DateR\x08\x62irthday\x12\x12\n\x04\x63ity\x18\x06 \x01(\tR\x04\x63ity\"f\n\x16UpdateUserInfoResponse\x12\x18\n\x07success\x18\x01 \x01(\x08R\x07success\x12\x32\n\x0bupdatedUser\x18\x02 \x01(\x0b\x32\x10.kic.common.UserR\x0bupdatedUser\"L\n\x12GetJWTTokenRequest\x12\x1a\n\x08username\x18\x01 \x01(\tR\x08username\x12\x1a\n\x08password\x18\x02 \x01(\tR\x08password\"+\n\x13GetJWTTokenResponse\x12\x14\n\x05token\x18\x01 \x01(\tR\x05token2\xcd\x04\n\x05Users\x12L\n\x0bGetJWTToken\x12\x1d.kic.users.GetJWTTokenRequest\x1a\x1e.kic.users.GetJWTTokenResponse\x12@\n\x07\x41\x64\x64User\x12\x19.kic.users.AddUserRequest\x1a\x1a.kic.users.AddUserResponse\x12^\n\x11GetUserByUsername\x12#.kic.users.GetUserByUsernameRequest\x1a$.kic.users.GetUserByUsernameResponse\x12L\n\x0bGetUserByID\x12\x1d.kic.users.GetUserByIDRequest\x1a\x1e.kic.users.GetUserByIDResponse\x12X\n\x0fGetUserNameByID\x12!.kic.users.GetUserNameByIDRequest\x1a\".kic.users.GetUserNameByIDResponse\x12U\n\x0e\x44\x65leteUserByID\x12 .kic.users.DeleteUserByIDRequest\x1a!.kic.users.DeleteUserByIDResponse\x12U\n\x0eUpdateUserInfo\x12 .kic.users.UpdateUserInfoRequest\x1a!.kic.users.UpdateUserInfoResponseB\x15Z\x13./proto/users;protob\x06proto3'
+  serialized_pb=b'\n\x11proto/users.proto\x12\tkic.users\x1a\x12proto/common.proto\"\xbc\x01\n\x0e\x41\x64\x64UserRequest\x12\x14\n\x05\x65mail\x18\x01 \x01(\tR\x05\x65mail\x12(\n\x0f\x64\x65siredUsername\x18\x02 \x01(\tR\x0f\x64\x65siredUsername\x12(\n\x0f\x64\x65siredPassword\x18\x03 \x01(\tR\x0f\x64\x65siredPassword\x12,\n\x08\x62irthday\x18\x04 \x01(\x0b\x32\x10.kic.common.DateR\x08\x62irthday\x12\x12\n\x04\x63ity\x18\x05 \x01(\tR\x04\x63ity\"_\n\x0f\x41\x64\x64UserResponse\x12\x18\n\x07success\x18\x01 \x01(\x08R\x07success\x12\x32\n\x0b\x63reatedUser\x18\x02 \x01(\x0b\x32\x10.kic.common.UserR\x0b\x63reatedUser\"6\n\x18GetUserByUsernameRequest\x12\x1a\n\x08username\x18\x01 \x01(\tR\x08username\"[\n\x19GetUserByUsernameResponse\x12\x18\n\x07success\x18\x01 \x01(\x08R\x07success\x12$\n\x04user\x18\x02 \x01(\x0b\x32\x10.kic.common.UserR\x04user\",\n\x12GetUserByIDRequest\x12\x16\n\x06userID\x18\x01 \x01(\x03R\x06userID\"U\n\x13GetUserByIDResponse\x12\x18\n\x07success\x18\x01 \x01(\x08R\x07success\x12$\n\x04user\x18\x02 \x01(\x0b\x32\x10.kic.common.UserR\x04user\"0\n\x16GetUserNameByIDRequest\x12\x16\n\x06userID\x18\x01 \x01(\x03R\x06userID\"5\n\x17GetUserNameByIDResponse\x12\x1a\n\x08username\x18\x01 \x01(\tR\x08username\"/\n\x15\x44\x65leteUserByIDRequest\x12\x16\n\x06userID\x18\x01 \x01(\x03R\x06userID\"2\n\x16\x44\x65leteUserByIDResponse\x12\x18\n\x07success\x18\x01 \x01(\x08R\x07success\"\xed\x01\n\x15UpdateUserInfoRequest\x12\x16\n\x06userID\x18\x01 \x01(\x03R\x06userID\x12\x14\n\x05\x65mail\x18\x02 \x01(\tR\x05\x65mail\x12(\n\x0f\x64\x65siredUsername\x18\x03 \x01(\tR\x0f\x64\x65siredUsername\x12(\n\x0f\x64\x65siredPassword\x18\x04 \x01(\tR\x0f\x64\x65siredPassword\x12,\n\x08\x62irthday\x18\x05 \x01(\x0b\x32\x10.kic.common.DateR\x08\x62irthday\x12\x12\n\x04\x63ity\x18\x06 \x01(\tR\x04\x63ity\x12\x10\n\x03\x62io\x18\x07 \x01(\tR\x03\x62io\"f\n\x16UpdateUserInfoResponse\x12\x18\n\x07success\x18\x01 \x01(\x08R\x07success\x12\x32\n\x0bupdatedUser\x18\x02 \x01(\x0b\x32\x10.kic.common.UserR\x0bupdatedUser\"L\n\x12GetJWTTokenRequest\x12\x1a\n\x08username\x18\x01 \x01(\tR\x08username\x12\x1a\n\x08password\x18\x02 \x01(\tR\x08password\"+\n\x13GetJWTTokenResponse\x12\x14\n\x05token\x18\x01 \x01(\tR\x05token2\xcd\x04\n\x05Users\x12L\n\x0bGetJWTToken\x12\x1d.kic.users.GetJWTTokenRequest\x1a\x1e.kic.users.GetJWTTokenResponse\x12@\n\x07\x41\x64\x64User\x12\x19.kic.users.AddUserRequest\x1a\x1a.kic.users.AddUserResponse\x12^\n\x11GetUserByUsername\x12#.kic.users.GetUserByUsernameRequest\x1a$.kic.users.GetUserByUsernameResponse\x12L\n\x0bGetUserByID\x12\x1d.kic.users.GetUserByIDRequest\x1a\x1e.kic.users.GetUserByIDResponse\x12X\n\x0fGetUserNameByID\x12!.kic.users.GetUserNameByIDRequest\x1a\".kic.users.GetUserNameByIDResponse\x12U\n\x0e\x44\x65leteUserByID\x12 .kic.users.DeleteUserByIDRequest\x1a!.kic.users.DeleteUserByIDResponse\x12U\n\x0eUpdateUserInfo\x12 .kic.users.UpdateUserInfoRequest\x1a!.kic.users.UpdateUserInfoResponseB\x15Z\x13./proto/users;protob\x06proto3'
   ,
   dependencies=[proto_dot_common__pb2.DESCRIPTOR,])
 
@@ -446,6 +446,13 @@ _UPDATEUSERINFOREQUEST = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, json_name='city', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='bio', full_name='kic.users.UpdateUserInfoRequest.bio', index=6,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, json_name='bio', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -459,7 +466,7 @@ _UPDATEUSERINFOREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=829,
-  serialized_end=1048,
+  serialized_end=1066,
 )
 
 
@@ -497,8 +504,8 @@ _UPDATEUSERINFORESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1050,
-  serialized_end=1152,
+  serialized_start=1068,
+  serialized_end=1170,
 )
 
 
@@ -536,8 +543,8 @@ _GETJWTTOKENREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1154,
-  serialized_end=1230,
+  serialized_start=1172,
+  serialized_end=1248,
 )
 
 
@@ -568,8 +575,8 @@ _GETJWTTOKENRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1232,
-  serialized_end=1275,
+  serialized_start=1250,
+  serialized_end=1293,
 )
 
 _ADDUSERREQUEST.fields_by_name['birthday'].message_type = proto_dot_common__pb2._DATE
@@ -702,8 +709,8 @@ _USERS = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=1278,
-  serialized_end=1867,
+  serialized_start=1296,
+  serialized_end=1885,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetJWTToken',
