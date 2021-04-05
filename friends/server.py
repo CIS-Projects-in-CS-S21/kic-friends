@@ -68,10 +68,9 @@ class FriendsService(FriendsBase):
                                      ) -> 'AddAwaitingFriendResponse':
         uid1 = req.firstUserID
         uid2 = req.secondUserID
-        success1 = self.db.add_awaiting_friend(uid1, uid2)
-        success2 = self.db.add_awaiting_friend(uid2, uid1)
+        success = self.db.add_awaiting_friend(uid2, uid1)
         return AddAwaitingFriendResponse(
-            success=(success1 and success2)
+            success=success
         )
 
     async def get_usernames_from_user_service(self, auth_token_header: str, friend_ids: 'List[int]'):
@@ -93,6 +92,13 @@ class FriendsService(FriendsBase):
                 except GRPCError as error:
                     logger.info(f"User service error: {error.status} {error.message}")
         return user_names
+
+    def delete_awaiting_friend(self,
+                      req: 'DeleteConnectionBetweenUsersRequest'
+                      ) -> bool:
+        uid1 = req.firstUserID
+        uid2 = req.secondUserID
+        return self.db.delete_awaiting_friend_for_uid(uid2, uid1)
 
     ######## RPC Handlers ########
 
@@ -248,3 +254,19 @@ class FriendsService(FriendsBase):
         request = await stream.recv_message()
         res = self.add_awaiting_friend_to_cache(request)
         await stream.send_message(res)
+
+    async def DeleteAwaitingFriendBetweenUsers(self,
+                                               stream: 'grpclib.server.Stream['
+                                                       'DeleteConnectionBetweenUsersRequest,'
+                                                       'DeleteConnectionBetweenUsersResponse]'
+                                               ) -> None:
+        request = await stream.recv_message()
+        success = self.delete_awaiting_friend(request)
+        if success:
+            await stream.send_message(DeleteConnectionBetweenUsersResponse())
+            return
+        raise GRPCError(
+            Status.NOT_FOUND,
+            'Could not find one of the requested users',
+            [],
+        )

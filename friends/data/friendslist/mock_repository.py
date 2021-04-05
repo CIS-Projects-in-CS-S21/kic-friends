@@ -54,3 +54,11 @@ class MockRepository(Repository):
         else:
             self.awaiting[uid] = [friend_uid]
         return True
+
+    def delete_awaiting_friend_for_uid(self, uid: int, friend_uid: int) -> bool:
+        if uid in self.awaiting:
+            if friend_uid in self.awaiting[uid]:
+                self.awaiting[uid].remove(friend_uid)
+            else:
+                return False
+        return True

@@ -14,6 +14,9 @@ async def main(*, host='0.0.0.0', port=50051):
     # only one possible neo4j db at a time, will need to share for prod and test
     config.DATABASE_URL = f"bolt://neo4j:{os.environ['NEO4J_PASSWORD']}@graph-neo4j:7687"
 
+    # USE THIS FOR INTEGRATION TEST
+    #config.DATABASE_URL = f"bolt://neo4j:test@graph:7687"
+
     if os.getenv("PROD") is None:
         db_name = "kic-friends-test"
         users_service_url = "test.api.keeping-it-casual.com"

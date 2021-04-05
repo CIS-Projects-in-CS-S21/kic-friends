@@ -87,3 +87,12 @@ class MongoRepository(Repository):
                 return True
             else:
                 return False
+
+    def delete_awaiting_friend_for_uid(self, uid: int, friend_uid: int) -> bool:
+        result = self.friend_collection.update_one(
+            {"uid": uid},
+            {"$pull": {"awaiting": friend_uid}}
+        )
+        if result.modified_count > 0:
+            return True
+        return False
