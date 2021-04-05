@@ -55,6 +55,10 @@ class FriendsBase(abc.ABC):
     async def DeleteConnectionBetweenUsers(self, stream: 'grpclib.server.Stream[proto.friends_pb2.DeleteConnectionBetweenUsersRequest, proto.friends_pb2.DeleteConnectionBetweenUsersResponse]') -> None:
         pass
 
+    @abc.abstractmethod
+    async def DeleteAwaitingFriendBetweenUsers(self, stream: 'grpclib.server.Stream[proto.friends_pb2.DeleteConnectionBetweenUsersRequest, proto.friends_pb2.DeleteConnectionBetweenUsersResponse]') -> None:
+        pass
+
     def __mapping__(self) -> typing.Dict[str, grpclib.const.Handler]:
         return {
             '/kic.friends.Friends/GetFriendsUsernamesForUser': grpclib.const.Handler(
@@ -113,6 +117,12 @@ class FriendsBase(abc.ABC):
             ),
             '/kic.friends.Friends/DeleteConnectionBetweenUsers': grpclib.const.Handler(
                 self.DeleteConnectionBetweenUsers,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                proto.friends_pb2.DeleteConnectionBetweenUsersRequest,
+                proto.friends_pb2.DeleteConnectionBetweenUsersResponse,
+            ),
+            '/kic.friends.Friends/DeleteAwaitingFriendBetweenUsers': grpclib.const.Handler(
+                self.DeleteAwaitingFriendBetweenUsers,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 proto.friends_pb2.DeleteConnectionBetweenUsersRequest,
                 proto.friends_pb2.DeleteConnectionBetweenUsersResponse,
@@ -180,6 +190,12 @@ class FriendsStub:
         self.DeleteConnectionBetweenUsers = grpclib.client.UnaryUnaryMethod(
             channel,
             '/kic.friends.Friends/DeleteConnectionBetweenUsers',
+            proto.friends_pb2.DeleteConnectionBetweenUsersRequest,
+            proto.friends_pb2.DeleteConnectionBetweenUsersResponse,
+        )
+        self.DeleteAwaitingFriendBetweenUsers = grpclib.client.UnaryUnaryMethod(
+            channel,
+            '/kic.friends.Friends/DeleteAwaitingFriendBetweenUsers',
             proto.friends_pb2.DeleteConnectionBetweenUsersRequest,
             proto.friends_pb2.DeleteConnectionBetweenUsersResponse,
         )

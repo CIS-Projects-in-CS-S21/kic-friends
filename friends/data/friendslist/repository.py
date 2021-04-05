@@ -23,3 +23,7 @@ class Repository(abc.ABC):
     @abc.abstractmethod
     def add_awaiting_friend(self, uid: int, friend_uid: int) -> bool:
         pass
+
+    @abc.abstractmethod
+    def delete_awaiting_friend_for_uid(self, uid: int, friend_uid: int) -> bool:
+        pass

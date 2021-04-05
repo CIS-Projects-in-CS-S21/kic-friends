@@ -87,8 +87,8 @@ async def asyncSetUp(tests):
         if friend == "testuser3":
             await tests.client.AddAwaitingFriend(
                 AddAwaitingFriendRequest(
-                    firstUserID=tests.test_user_id,
-                    secondUserID=res.user.userID,
+                    firstUserID=res.user.userID,
+                    secondUserID=tests.test_user_id,
                 )
             )
         else:
@@ -315,11 +315,11 @@ class IntegrationTests(unittest.IsolatedAsyncioTestCase):
     async def test_get_awaiting_friend(self):
         res = await self.client.GetAwaitingFriendsForUser(GetFriendsForUserRequest(
             user=User(
-                userID=65,
+                userID=70,
             )
         )
         )
-        self.assertListEqual(list(res.friends), [70])
+        self.assertListEqual(list(res.friends), [65])
 
     async def test_add_awaiting_friend(self):
         success = await self.client.AddAwaitingFriend(
@@ -329,14 +329,6 @@ class IntegrationTests(unittest.IsolatedAsyncioTestCase):
             )
         )
         self.assertTrue(success.success)
-        res1 = await self.client.GetAwaitingFriendsForUser(
-            GetFriendsForUserRequest(
-                user=User(
-                    userID=90,
-                )
-            )
-        )
-        u1_friends_list = list(res1.friends)
         res2 = await self.client.GetAwaitingFriendsForUser(
             GetFriendsForUserRequest(
                 user=User(
@@ -345,7 +337,6 @@ class IntegrationTests(unittest.IsolatedAsyncioTestCase):
             )
         )
         u2_friends_list = list(res2.friends)
-        self.assertListEqual(u1_friends_list, [95])
         self.assertListEqual(u2_friends_list, [90])
 
     async def test_get_friends_usernames(self):
