@@ -2,6 +2,7 @@ import asyncio
 import unittest
 import os
 import sys
+import logging
 
 from grpclib import GRPCError
 from grpclib.client import Channel
@@ -12,6 +13,12 @@ from proto.users_pb2 import GetUserByUsernameRequest, GetJWTTokenRequest
 from proto.users_grpc import UsersStub
 from proto.friends_pb2 import *
 from proto.friends_grpc import FriendsStub
+
+
+logger = logging.getLogger('test')
+FORMAT = "[%(funcName)20s() ] %(message)s"
+logging.basicConfig(format=FORMAT)
+logger.setLevel(logging.DEBUG)
 
 
 async def asyncSetUp(tests):
@@ -223,6 +230,7 @@ class IntegrationTests(unittest.IsolatedAsyncioTestCase):
         friends = list(resp.friends)
         # includes friends who add
         self.assertListEqual(friends, [1, 2, 3, 6, 8, 20, 25])
+        logger.debug("Success")
 
     # Check that if we attempt to get a not existing user's friends we get an empty proper list
     async def test_get_nonexisting_friends_list(self):
@@ -235,6 +243,7 @@ class IntegrationTests(unittest.IsolatedAsyncioTestCase):
         ))
         friends = list(resp.friends)
         self.assertListEqual(friends, [])
+        logger.debug("Success")
 
     # Check that if we delete an existing friend and user combo that we succeed
     async def test_delete_friend_existing(self):
@@ -264,6 +273,7 @@ class IntegrationTests(unittest.IsolatedAsyncioTestCase):
 
         self.assertListEqual(u1_friends_list, [3, 5])
         self.assertListEqual(u2_friends_list, [5, 6])
+        logger.debug("Success")
 
     async def test_delete_friend_not_existing(self):
         with self.assertRaises(GRPCError) as context:
@@ -302,6 +312,7 @@ class IntegrationTests(unittest.IsolatedAsyncioTestCase):
         u2_friends_list = sorted(list(res2.friends))
         self.assertListEqual(u1_friends_list, [5, 10, 25])
         self.assertListEqual(u2_friends_list, [5, 10, 20])
+        logger.debug("Success")
 
     async def test_add_friend_already_existing(self):
         success = await self.client.CreateConnectionForUsers(
@@ -311,6 +322,7 @@ class IntegrationTests(unittest.IsolatedAsyncioTestCase):
             )
         )
         self.assertFalse(success.success)
+        logger.debug("Success")
 
     async def test_get_awaiting_friend(self):
         res = await self.client.GetAwaitingFriendsForUser(GetFriendsForUserRequest(
@@ -320,6 +332,7 @@ class IntegrationTests(unittest.IsolatedAsyncioTestCase):
         )
         )
         self.assertListEqual(list(res.friends), [65])
+        logger.debug("Success")
 
     async def test_add_awaiting_friend(self):
         success = await self.client.AddAwaitingFriend(
@@ -338,6 +351,7 @@ class IntegrationTests(unittest.IsolatedAsyncioTestCase):
         )
         u2_friends_list = list(res2.friends)
         self.assertListEqual(u2_friends_list, [90])
+        logger.debug("Success")
 
     async def test_get_friends_usernames(self):
         res = await self.client.GetFriendsUsernamesForUser(
@@ -351,6 +365,7 @@ class IntegrationTests(unittest.IsolatedAsyncioTestCase):
 
         friends = sorted(list(res.friends))
         self.assertListEqual(friends, ["testuser1", "testuser2"])
+        logger.debug("Success")
 
     async def test_get_awaiting_friends_usernames(self):
         res = await self.client.GetAwaitingFriendsUsernamesForUser(
@@ -364,6 +379,7 @@ class IntegrationTests(unittest.IsolatedAsyncioTestCase):
 
         friends = sorted(list(res.friends))
         self.assertListEqual(friends, ["testuser3"])
+        logger.debug("Success")
 
     async def test_get_connection_between_existing_friends(self):
         res = await self.client.GetConnectionBetweenUsers(
@@ -373,6 +389,7 @@ class IntegrationTests(unittest.IsolatedAsyncioTestCase):
             )
         )
         self.assertEqual(res.connectionStrength, 1.0)
+        logger.debug("Success")
 
     async def test_get_connection_between_not_existing_friends(self):
         with self.assertRaises(GRPCError) as context:
@@ -384,6 +401,7 @@ class IntegrationTests(unittest.IsolatedAsyncioTestCase):
             )
 
         self.assertTrue(context.exception is not None)
+        logger.debug("Success")
 
     async def test_update_connection_between_existing_friends(self):
         res = await self.client.UpdateConnectionBetweenUsers(
@@ -401,6 +419,7 @@ class IntegrationTests(unittest.IsolatedAsyncioTestCase):
             )
         )
         self.assertEqual(res.connectionStrength, 0.5)
+        logger.debug("Success")
 
     async def test_update_connection_between_not_existing_friends(self):
         with self.assertRaises(GRPCError) as context:
@@ -411,6 +430,7 @@ class IntegrationTests(unittest.IsolatedAsyncioTestCase):
                 )
             )
         self.assertTrue(context.exception is not None)
+        logger.debug("Success")
 
     # TODO: This was tested prior to integrating the user service to get recommendations usernames,
     # we will need to adjust and create a friend graph of test users

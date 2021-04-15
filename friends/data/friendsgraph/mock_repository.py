@@ -11,8 +11,11 @@ class MockGraph(Repository):
         self.adjacency_list.setdefault(friend_uid, {})[uid] = 1.0
 
     def delete_connection(self, uid: int, friend_uid: int):
+        if uid not in self.adjacency_list:
+            return False
         self.adjacency_list.get(uid).pop(friend_uid)
         self.adjacency_list.get(friend_uid).pop(uid)
+        return True
 
     def update_connection(self, uid: int, friend_uid: int, multiplier: float):
         self.adjacency_list.setdefault(uid, {})[friend_uid] *= multiplier
