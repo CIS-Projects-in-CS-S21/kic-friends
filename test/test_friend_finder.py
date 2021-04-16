@@ -1,8 +1,13 @@
 import unittest
-import random
+import logging
 
 from friends.data.friendsgraph.friend_finding.friend_finder import FriendFinder
 from friends.data.friendsgraph.mock_repository import MockGraph
+
+logger = logging.getLogger('test')
+FORMAT = "[%(funcName)20s() ] %(message)s"
+logging.basicConfig(format=FORMAT)
+logger.setLevel(logging.DEBUG)
 
 
 class TestFriendFinder(unittest.TestCase):
@@ -10,7 +15,6 @@ class TestFriendFinder(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
-
         graph = MockGraph()
 
         # I drew this and did Dijkstra's by hand
@@ -48,8 +52,9 @@ class TestFriendFinder(unittest.TestCase):
         self.assertEqual(d[4], 2)
         self.assertEqual(d[5], 2.2)
         self.assertEqual(d[6], 2.3)
+        logger.debug("Success")
 
     def testGetRecommendations(self):
         d = self.finder.get_recommendations(2, 0)
         self.assertListEqual(d, [4, 5])
-
+        logger.debug("Success")

@@ -1,5 +1,7 @@
 import unittest
+import logging
 
+from friends.data.friendsgraph.mock_repository import MockGraph
 from friends.data.friendslist.mock_repository import MockRepository
 from friends.server import FriendsService
 from proto.friends_pb2 import (GetFriendsForUserRequest,
@@ -7,6 +9,11 @@ from proto.friends_pb2 import (GetFriendsForUserRequest,
                                CreateConnectionForUsersRequest,
                                AddAwaitingFriendRequest)
 from proto.common_pb2 import User
+
+logger = logging.getLogger('test')
+FORMAT = "[%(funcName)20s() ] %(message)s"
+logging.basicConfig(format=FORMAT)
+logger.setLevel(logging.DEBUG)
 
 
 class TestFriendRelationships(unittest.TestCase):
@@ -30,13 +37,20 @@ class TestFriendRelationships(unittest.TestCase):
                 70: {65}
             }
         )
+        graph = MockGraph()
+        for uid in repo.db.keys():
+            for friend in repo.db[uid]:
+                graph.create_connection(uid, friend)
         cls.server = FriendsService(
-            repo
+            repo,
+            graph,
+            None
         )
 
     """
     Check that if we attempt to get an existing user's friends we get the proper list
     """
+
     def test_get_existing_friends_list(self):
         resp = self.server.get_user_friends_from_cache(GetFriendsForUserRequest(
             user=User(
@@ -47,10 +61,12 @@ class TestFriendRelationships(unittest.TestCase):
         ))
         friends = list(resp.friends)
         self.assertListEqual(friends, [1, 2, 3, 6])
+        logger.debug("Success")
 
     """
     Check that if we attempt to get a not existing user's friends we get an empty proper list
     """
+
     def test_get_nonexisting_friends_list(self):
         resp = self.server.get_user_friends_from_cache(GetFriendsForUserRequest(
             user=User(
@@ -61,18 +77,19 @@ class TestFriendRelationships(unittest.TestCase):
         ))
         friends = list(resp.friends)
         self.assertListEqual(friends, [])
+        logger.debug("Success")
 
     """
     Check that if we delete 
     """
+
     def test_delete_friend_existing(self):
-        success = self.server.delete_friend_from_cache(
+        self.server.delete_friend(
             DeleteConnectionBetweenUsersRequest(
                 firstUserID=8,
                 secondUserID=1,
             )
         )
-        self.assertTrue(success)
         u1_friends_list = list(self.server.get_user_friends_from_cache(
             GetFriendsForUserRequest(
                 user=User(
@@ -89,9 +106,10 @@ class TestFriendRelationships(unittest.TestCase):
         ).friends)
         self.assertListEqual(u1_friends_list, [3, 5])
         self.assertListEqual(u2_friends_list, [5, 6])
+        logger.debug("Success")
 
     def test_delete_friend_not_existing(self):
-        success = self.server.delete_friend_from_cache(
+        success = self.server.delete_friend(
             DeleteConnectionBetweenUsersRequest(
                 firstUserID=1000,
                 secondUserID=1,
@@ -100,13 +118,12 @@ class TestFriendRelationships(unittest.TestCase):
         self.assertFalse(success)
 
     def test_add_friend_existing(self):
-        success = self.server.add_friend(
+        self.server.add_friend(
             CreateConnectionForUsersRequest(
                 firstUserID=20,
                 secondUserID=25,
             )
         )
-        self.assertTrue(success.success)
         u1_friends_list = list(self.server.get_user_friends_from_cache(
             GetFriendsForUserRequest(
                 user=User(
@@ -123,6 +140,7 @@ class TestFriendRelationships(unittest.TestCase):
         ).friends)
         self.assertListEqual(u1_friends_list, [5, 10, 25])
         self.assertListEqual(u2_friends_list, [5, 10, 20])
+        logger.debug("Success")
 
     def test_add_friend_already_existing(self):
         success = self.server.add_friend(
@@ -135,12 +153,13 @@ class TestFriendRelationships(unittest.TestCase):
 
     def test_get_awaiting_friend(self):
         res = self.server.get_user_awaiting_friends_from_cache(GetFriendsForUserRequest(
-                user=User(
-                    userID=65,
-                )
+            user=User(
+                userID=65,
             )
         )
+        )
         self.assertListEqual(list(res.friends), [70])
+        logger.debug("Success")
 
     def test_add_awaiting_friend(self):
         success = self.server.add_awaiting_friend_to_cache(
@@ -150,13 +169,6 @@ class TestFriendRelationships(unittest.TestCase):
             )
         )
         self.assertTrue(success.success)
-        u1_friends_list = list(self.server.get_user_awaiting_friends_from_cache(
-            GetFriendsForUserRequest(
-                user=User(
-                    userID=90,
-                )
-            )
-        ).friends)
         u2_friends_list = list(self.server.get_user_awaiting_friends_from_cache(
             GetFriendsForUserRequest(
                 user=User(
@@ -164,5 +176,5 @@ class TestFriendRelationships(unittest.TestCase):
                 )
             )
         ).friends)
-        self.assertListEqual(u1_friends_list, [95])
         self.assertListEqual(u2_friends_list, [90])
+        logger.debug("Success")
